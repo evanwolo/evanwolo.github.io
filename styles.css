@@ -4,6 +4,7 @@ body {
     margin-right: auto;
     font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
     font-weight: normal;
+    min-height: 100vh;
 }
 
 footer {
@@ -12,6 +13,8 @@ footer {
 }
 
 h1,h2 {
+    color: black;
+    text-shadow: 3px 3px 2px rgba(181, 182, 199, 1);
     text-wrap: nowrap;
     text-align: center;
 }
@@ -69,8 +72,29 @@ li :hover {
 
 @media only screen and (max-width: 600px) {
 
-    footer{
+    body {
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      footer {
         display:block;
+        min-height: 50px;
+        background: PapayaWhip;
+      }
+      
+      main {
+        flex: 1;
+      }
+
+    .homecenter {
+        text-align: center;
+        box-sizing: border-box;
+        padding: 5%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     #conbody {
