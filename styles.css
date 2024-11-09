@@ -1,18 +1,41 @@
 /* General Styling */
 body {
-    font-family: 'Bahnschrift', sans-serif;
-    background-color: #1f1f2e;
+    font-family: 'Poppins', sans-serif;
     color: #e0e0e0;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background: linear-gradient(45deg, rgba(30, 133, 255, 0.7), rgba(0, 0, 0, 0.8)); /* Gradient background */
+    height: 100vh; /* Ensure full height to cover the screen */
+}
+
+/* Frosted Glass Effect */
+.homecenter {
+    text-align: center;
+    padding: 20px; /* Added padding around content for extra space */
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.25); /* Increased opacity for a stronger glass effect */
+    border-radius: 15px; /* Rounded corners for card */
+    backdrop-filter: blur(25px); /* Stronger blur to enhance frosted effect */
+    -webkit-backdrop-filter: blur(25px); /* For Safari */
+    position: relative;
+    z-index: 1; /* Ensure this sits above the gradient background */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Subtle shadow for card effect */
+    width: 90%; /* Make the card take up most of the screen */
+    max-width: 800px; /* Limit max width */
+    margin-top: 5%; /* Push down the card from the top a little */
+}
+
+/* Additional padding for elements inside .homecenter */
+.homecenter > * {
+    padding: 2%;
 }
 
 h1, h2 {
     color: #e0e0e0;
     text-align: center;
     font-weight: 700;
-    margin:0;
+    margin: 0;
 }
 
 h1 {
@@ -21,16 +44,6 @@ h1 {
 
 h2 {
     color: #c5c5d7;
-}
-
-.homecenter {
-    text-align: center;
-    padding: 12%;
-    margin: 0 auto;
-}
-
-.homecenter > * {
-    padding: 2%;
 }
 
 a {
