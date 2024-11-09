@@ -6,6 +6,15 @@ body {
     font-weight: normal;
 }
 
+footer {
+    display: none;
+    padding-bottom: 0;
+}
+
+h1,h2 {
+    text-wrap: nowrap;
+    text-align: center;
+}
 
 .homecenter {
     text-align: center;
@@ -35,7 +44,6 @@ a{
     text-decoration: none;
 }
 
-
 .button {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -45,10 +53,28 @@ a{
     transition: 0.3s;
 }
 
+#conbody {visibility: visible;}
+
+.contacts {
+    justify-content: center;
+}
+
 li a{
     color: black;
 }
 
 li :hover {
     color: green;
+}
+
+@media only screen and (max-width: 600px) {
+
+    footer{
+        display:block;
+    }
+
+    #conbody {
+        display: none;
+    }
+    
 }
