@@ -71,22 +71,16 @@ li :hover {
 
 @media only screen and (max-width: 600px) {
 
-    body {
-        min-height: 100vh;
-        margin: 0;
+    body{
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+    }
+
+    #directory ul {
         display: flex;
         flex-direction: column;
-      }
-      
-      footer {
-        display:block;
-        min-height: 50px;
-        background: PapayaWhip;
-      }
-      
-      main {
-        flex: 1;
-      }
+    }
 
     .homecenter {
         text-align: center;
@@ -94,6 +88,10 @@ li :hover {
         padding: 5%;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    footer {
+        display: block;
     }
 
     #conbody {
