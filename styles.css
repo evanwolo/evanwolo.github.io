@@ -1,101 +1,151 @@
+/* General Styling */
 body {
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
-    font-weight: normal;
-    min-height: 100vh;
+    font-family: 'Bahnschrift', sans-serif;
+    background-color: #1f1f2e;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
-footer {
-    display: none;
-    padding-bottom: 0;
-}
-
-h1,h2 {
-    color: black;
-    text-shadow: 3px 3px 2px rgba(181, 182, 199, 1);
+h1, h2 {
+    color: #e0e0e0;
     text-align: center;
+    font-weight: 700;
+    margin:0;
+}
+
+h1 {
+    color: #fff;
+}
+
+h2 {
+    color: #c5c5d7;
 }
 
 .homecenter {
     text-align: center;
-    box-sizing: border-box;
-    padding: 25%;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 12%;
+    margin: 0 auto;
+}
+
+.homecenter > * {
+    padding: 2%;
+}
+
+a {
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: color 0.4s ease;
+}
+
+a:hover {
+    color: #1c85ff;
+}
+
+/* Directory Buttons */
+#directory {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.button {
+    padding: 12px;
+    background: #1c85ff;
+    color: #fff;
+    border-radius: 8px;
+    transition: background 0.4s ease, transform 0.4s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+}
+
+.button:hover {
+    background: #1064c3;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
 img {
     width: 42px;
     height: 42px;
     object-fit: cover;
+    filter: grayscale(70%);
+    transition: filter 0.4s ease, transform 0.4s ease;
 }
 
-ul {
-    padding-left:0;
-    display: flex;
+.contacts img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.15);
+}
+
+/* Flip Effect on Hover */
+.flip-text {
+    display: inline-block;
+    font-size: 1.5em;
+    color: #c5c5d7;
+    transition: transform 1.5s ease; /* Slower rotation */
+    cursor: pointer;
+}
+
+.flip-text:hover {
+    transform: rotateX(360deg);
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards; /* Slower fade-in */
+}
+
+.fade-in.delay-1 { 
+    animation-delay: 1s; 
+    width: 50%; 
     margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    justify-content: space-around;
-    list-style: none;
+    margin-right: auto ;
+}
+.fade-in.delay-2 { animation-delay: 1.5s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-a{
-    text-decoration: none;
+/* Footer */
+footer {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    color: #e0e0e0;
 }
-
-.button {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    width: 25%;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-
-#conbody {visibility: visible;}
 
 .contacts {
+    display: flex;
     justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
 }
 
-li a{
-    color: black;
+.nametag > * {
+    padding: 0;
 }
 
-li :hover {
-    color: green;
-}
-
+/* Responsive Layout */
 @media only screen and (max-width: 600px) {
-
-    body{
-        display: flex;
-        height: 100vh;
-        flex-direction: column;
-    }
-
-    #directory ul {
-        display: flex;
-        flex-direction: column;
-    }
-
     .homecenter {
-        text-align: center;
-        box-sizing: border-box;
         padding: 5%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    footer {
-        display: block;
-    }
-
-    #conbody {
-        display: none;
     }
     
+    #directory {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
