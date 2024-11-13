@@ -26,6 +26,16 @@ body {
     margin-top: 5%; /* Push down the card from the top a little */
 }
 
+.gradient-text {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #d1d1d1, #a0a0a0);
+    -webkit-background-clip: text;
+    color: transparent;
+    cursor: pointer;
+    transition: background 0.4s ease;
+}
+
 /* Additional padding for elements inside .homecenter */
 .homecenter > * {
     padding: 2%;
@@ -154,6 +164,8 @@ footer {
 /* Responsive Layout */
 @media only screen and (max-width: 600px) {
     .homecenter {
+        width: 80%;
+        height: 90%;
         padding: 5%;
     }
     
