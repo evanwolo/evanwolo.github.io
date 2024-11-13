@@ -1,3 +1,22 @@
+:root {
+    --gradient-one: linear-gradient(45deg, #1c85ff, #ff7f00); /* Blue to Orange */
+    --gradient-two: linear-gradient(45deg, #ff007f, #7f00ff); /* Pink to Purple */
+    --gradient-three: linear-gradient(45deg, #00ff7f, #ff00ff); /* Green to Magenta */
+}
+
+/* Multiple gradient options */
+.gradient-one {
+    background: var(--gradient-one);
+}
+
+.gradient-two {
+    background: var(--gradient-two);
+}
+
+.gradient-three {
+    background: var(--gradient-three);
+}
+
 /* General Styling */
 body {
     font-family: 'Poppins', sans-serif;
@@ -24,10 +43,10 @@ body {
     width: 90%; /* Make the card take up most of the screen */
     max-width: 800px; /* Limit max width */
     margin-top: 5%; /* Push down the card from the top a little */
+    overflow: hidden;
 }
 
 .gradient-text {
-    font-size: 3rem;
     font-weight: 700;
     background: linear-gradient(45deg, #d1d1d1, #a0a0a0);
     -webkit-background-clip: text;
@@ -163,10 +182,15 @@ footer {
 
 /* Responsive Layout */
 @media only screen and (max-width: 600px) {
+    h1{
+        font-size: 40px;
+    }
+
     .homecenter {
         width: 80%;
         height: 90%;
         padding: 5%;
+        overflow: scroll;
     }
     
     #directory {
