@@ -12,7 +12,7 @@
         <!-- Frosted Glass Business Card as a link -->
         <a href="https://www.linkedin.com/in/evanwolo/" class="business-card">
             <div class="card-content">
-                <h2 class="name" style="font-size: 24px;">Evan Wologodzew</h2>
+                <h2 class="name">Evan Wologodzew</h2>
                 <p class="position">Software Engineer</p>
                 <p class="company">RIT</p>
             </div>
@@ -25,9 +25,7 @@
         </ul>
 
         <div class="reveal-arrow" onclick="toggleFooter()">↑</div>
-        <div class="contact-text">
-            Contact
-        </div>
+        <div class="contact-text">Contact</div>
     </div>
 
     <div class="footer">
@@ -47,14 +45,12 @@
             const arrow = document.querySelector('.reveal-arrow');
 
             if (!footerVisible) {
-                // Slide up the footer and hide the arrow
                 footer.style.bottom = '0';
-                arrow.innerHTML = '↓';  // Change the arrow direction to down
+                arrow.innerHTML = '↓';
                 footerVisible = true;
             } else {
-                // Slide down the footer and show the arrow
                 footer.style.bottom = '-150px';
-                arrow.innerHTML = '↑';  // Change the arrow direction back to up
+                arrow.innerHTML = '↑';
                 footerVisible = false;
             }
         }
