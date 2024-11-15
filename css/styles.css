@@ -56,9 +56,15 @@ li {
 }
 
 .name {
+    text-shadow: 1px 1px 2px;
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 10px;
+    background: #355C7D;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fc5c7d, #6a82fb); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fc5c7d, #6a82fb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .position {
@@ -73,7 +79,7 @@ li {
     margin-bottom: 20px;
 }
 
-.business-card:hover {
+.container:hover .business-card {
     transform: scale(1.05);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s, box-shadow 0.3s;
@@ -175,6 +181,12 @@ li {
 
 
 @media (max-width: 480px) {
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100svh;
+    }
+
     .footer {
         height: 100px;
     }
@@ -186,21 +198,9 @@ li {
         align-content: center;
     }
 
-    .name {
-        font-size: 1.2em;
-    }
-
-    .position, .company {
-        font-size: 1em;
-    }
-
     .reveal-arrow {
         font-size: 1.2em;
-    }
-
-    .contact-text {
-        font-size: 1em;
-        bottom: 40px;
+        bottom: 100px;
     }
 
     .footer {
@@ -218,7 +218,7 @@ li {
         flex-direction: column;
         gap: 25px;
         padding: 0;
-        margin-top: 50px;
+        margin-top: 100px;
     }
 
     #directory li {
