@@ -1,102 +1,83 @@
-html{
-    overflow: hidden;
-}
-
-:root {
-    --gradient-one: linear-gradient(45deg, #1c85ff, #ff7f00); /* Blue to Orange */
-    --gradient-two: linear-gradient(45deg, #ff007f, #7f00ff); /* Pink to Purple */
-    --gradient-three: linear-gradient(45deg, #00ff7f, #ff00ff); /* Green to Magenta */
-}
-
-/* Multiple gradient options */
-.gradient-one {
-    background: var(--gradient-one);
-}
-
-.gradient-two {
-    background: var(--gradient-two);
-}
-
-.gradient-three {
-    background: var(--gradient-three);
-}
-
-/* General Styling */
-body {
-    font-family: 'Poppins', sans-serif;
-    color: #e0e0e0;
+/* Global Styles */
+* {
     margin: 0;
     padding: 0;
-    width: 100vw;
-    overflow-x: hidden;
-    background: linear-gradient(45deg, rgba(30, 133, 255, 0.7), rgba(0, 0, 0, 0.8)); /* Gradient background */
-    height: 100vh; /* Ensure full height to cover the screen */
+    box-sizing: border-box;
 }
 
-/* Frosted Glass Effect */
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: #e0e0e0;
+    background: lightblue;
+}
+
+/* Container and Home Center */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .homecenter {
+    align-content: center;
     text-align: center;
-    padding: 50px; /* Added padding around content for extra space */
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.25); /* Increased opacity for a stronger glass effect */
-    border-radius: 15px; /* Rounded corners for card */
-    backdrop-filter: blur(25px); /* Stronger blur to enhance frosted effect */
-    -webkit-backdrop-filter: blur(25px); /* For Safari */
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    width: 65%;
+    height: 65%;
     position: relative;
-    z-index: 1; /* Ensure this sits above the gradient background */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Subtle shadow for card effect */
-    width: 65%; /* Make the card take up most of the screen */
-    margin-top: 15vh;
- /* Push down the card from the top a little */
-    overflow: hidden;
+}
+
+.nametag h1, .nametag h2 {
+    margin: 0;
+}
+
+/* Main Text Block */
+.main-text-block {
+    font-size: 3rem;
+    text-align: center;
+    line-height: 1.5;
 }
 
 .gradient-text {
     font-weight: 700;
-    background: linear-gradient(45deg, #d1d1d1, #a0a0a0);
+    background: linear-gradient(45deg, #B0B0B0, #C0C0C0, #8B8B8B);
     -webkit-background-clip: text;
     color: transparent;
     cursor: pointer;
     transition: background 0.4s ease;
+    background-size: 400% 400%;
 }
 
-/* Additional padding for elements inside .homecenter */
-.homecenter > * {
-    padding: 2%;
+.gradient-text:hover {
+    animation: shimmer 2s infinite linear;
 }
 
-h1, h2 {
-    color: #e0e0e0;
-    text-align: center;
-    font-weight: 700;
-    margin: 0;
+/* Shimmer Effect */
+@keyframes shimmer {
+    0% {
+        background-position: 100% 100%;
+    }
+    50% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
 }
 
-h1 {
-    color: #fff;
-}
-
-h2 {
-    color: #c5c5d7;
-}
-
-a {
-    text-decoration: none;
-    color: #e0e0e0;
-    transition: color 0.4s ease;
-}
-
-a:hover {
-    color: #1c85ff;
-}
-
-/* Directory Buttons */
+/* Buttons and Navigation */
 #directory {
     display: flex;
     gap: 20px;
     justify-content: center;
     margin-top: 20px;
-    padding: 0;
     list-style: none;
 }
 
@@ -108,8 +89,6 @@ a:hover {
     transition: background 0.4s ease, transform 0.4s ease;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     font-weight: bold;
-    display: inline-block;
-    text-align: center;
     min-width: 120px;
 }
 
@@ -119,9 +98,29 @@ a:hover {
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
 }
 
-img {
-    width: 42px;
-    height: 42px;
+/* Footer */
+footer {
+    padding: 10px 0;
+    background-color: #111;
+    color: #e0e0e0;
+    text-align: center;
+}
+
+.contacts {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+.contacts li {
+    margin: 0;
+}
+
+.contacts img {
+    width: 30px;
+    height: 30px;
     object-fit: cover;
     filter: grayscale(70%);
     transition: filter 0.4s ease, transform 0.4s ease;
@@ -132,12 +131,31 @@ img {
     transform: scale(1.15);
 }
 
-/* Flip Effect on Hover */
+/* Animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.fade-in.delay-1 { 
+    animation-delay: 1s; 
+}
+
+.fade-in.delay-2 { 
+    animation-delay: 1.5s; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Flip Effect */
 .flip-text {
     display: inline-block;
     font-size: 1.5em;
     color: #c5c5d7;
-    transition: transform 1.5s ease; /* Slower rotation */
+    transition: transform 1.5s ease;
     cursor: pointer;
 }
 
@@ -145,62 +163,23 @@ img {
     transform: rotateX(360deg);
 }
 
-/* Fade-in Animation */
-.fade-in {
-    opacity: 0;
-    animation: fadeIn 2s forwards; /* Slower fade-in */
-}
-
-.fade-in.delay-1 { 
-    animation-delay: 1s; 
-    width: 50%; 
-    margin-left: auto;
-    margin-right: auto ;
-}
-.fade-in.delay-2 { animation-delay: 1.5s; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Footer */
-footer {
-    display: none;
-    text-align: center;
-    padding: 20px;
-    background-color: #111;
-    color: #e0e0e0;
-}
-
-.contacts {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    list-style: none;
-    padding: 0;
-}
-
-.nametag > * {
-    padding: 0;
-}
-
 /* Responsive Layout */
 @media only screen and (max-width: 600px) {
-    h1{
-        font-size: 40px;
-    }
-
     .homecenter {
         width: 80%;
-        height: 90%;
         padding: 5%;
-        overflow: scroll;
-        margin-top: 2vh;
     }
     
     #directory {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .main-text-block {
+        font-size: 2rem;
+    }
+
+    h1 {
+        font-size: 40px;
     }
 }
