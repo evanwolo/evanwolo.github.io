@@ -1,0 +1,175 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Fira Code', monospace;
+}
+
+/* Container */
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    min-height: 100vh;
+}
+
+/* Frosted Glass Business Card */
+.business-card {
+    overflow: hidden;
+    align-content: center;
+    width: 3.5in;
+    height: 2in;
+    background: rgba(255, 255, 255, 0.2); /* semi-transparent white background */
+    border-radius: 20px;
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    padding: 30px;
+    margin: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    color: black;
+    position: relative;
+    margin-top: 50px; /* Space between the business card and the buttons */
+    display: block;  /* Ensure the whole card is clickable */
+    text-decoration: none;  /* Remove underline from the link */
+}
+
+.card-content {
+    text-align: center;
+}
+
+.name {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.position {
+    font-size: 1.2em;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.company {
+    font-size: 1em;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+/* Optional hover effect */
+.business-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: -150px;  /* Start off below the viewport */
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: bottom 0.5s ease;  /* Smooth slide effect */
+}
+
+/* Show footer on hover */
+.container:hover .footer {
+    bottom: 0;  /* Slide in the footer */
+}
+
+/* Reveal Arrow */
+.reveal-arrow {
+    font-size: 2em;
+    cursor: pointer;
+    color: #333;
+    position: absolute;
+    bottom: 20px;  /* Place arrow at the bottom of the container */
+    transition: bottom 0.5s ease; /* Smooth transition for arrow */
+    width: 100%;
+    text-align: center;
+}
+
+/* Move arrow up on hover */
+.container:hover .reveal-arrow {
+    bottom: 80px;  /* Move the arrow up when hovered */
+}
+
+/* Contact Text */
+.contact-text {
+    position: absolute;
+    bottom: 50px;  /* Position it below the arrow */
+    color: #333;
+    font-size: 1.5em;
+    opacity: 0;
+    transform: translateY(20px); /* Start slightly below */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth slide-up and fade-in */
+}
+
+/* Show contact text on hover */
+.container:hover .contact-text {
+    opacity: 1;
+    transform: translateY(0); /* Slide up to its original position */
+}
+
+/* Contacts */
+.contacts {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+.contacts li {
+    margin: 0;
+}
+
+.contacts img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    filter: grayscale(70%);
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.contacts img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.15);
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.fade-in.delay-1 { 
+    animation-delay: 1s; 
+}
+
+.fade-in.delay-2 { 
+    animation-delay: 1.5s; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

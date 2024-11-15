@@ -4,33 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evan Wologodzew</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <div class="homecenter">
-            <div class="nametag">
-                <h1 style="font-family: 'Fira Code', monospace;">evan wologodzew</h1>
-                <h2 class="flip-text">ˈɛvən ˈwɒl.əˌɡɒdˌzuː</h2>
+        <!-- Frosted Glass Business Card as a link -->
+        <a href="https://www.linkedin.com/in/evanwolo/" class="business-card">
+            <div class="card-content">
+                <h2 class="name" style="font-size: 24px;">Evan Wologodzew</h2>
+                <p class="position">Software Engineer</p>
+                <p class="company">RIT</p>
             </div>
-            <p class="main-text-block gradient-text gradient-two fade-in delay-1">
-                web & mobile computing/software engineering student building dynamic full stack web applications at the Rochester Institute of Technology.
-            </p>
+        </a>
 
-            <ul id="directory">
-                <li class="button"><a href="./projects.html">Projects</a></li>
-                <li class="button"><a href="./resume.html">Resume</a></li>
-                <li class="button"><a href="./blog.html">Blog</a></li>
-            </ul>
+        <ul id="directory">
+            <li class="button"><a href="./projects.html">Projects</a></li>
+            <li class="button"><a href="./resume.html">Resume</a></li>
+            <li class="button"><a href="./blog.html">Blog</a></li>
+        </ul>
+
+        <div class="reveal-arrow" onclick="toggleFooter()">↑</div>
+        <div class="contact-text">
+            Contact
         </div>
     </div>
-    <footer>
+
+    <div class="footer">
         <ul class="contacts fade-in delay-2" id="conbody">
             <li><a href="https://github.com/evanwolo"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub"></a></li>
             <li><a href="mailto:emw7437@rit.edu"><img src="https://www.svgrepo.com/show/439751/email-circle.svg" alt="Email"></a></li>
             <li><a href="https://www.linkedin.com/in/evanwolo/"><img src="https://www.svgrepo.com/show/360538/linkedin-circle.svg" alt="LinkedIn"></a></li>
         </ul>
-    </footer>
+    </div>
+
+    <script>
+        let footerVisible = false;
+
+        // Function to toggle the footer visibility and arrow direction
+        function toggleFooter() {
+            const footer = document.querySelector('.footer');
+            const arrow = document.querySelector('.reveal-arrow');
+
+            if (!footerVisible) {
+                // Slide up the footer and hide the arrow
+                footer.style.bottom = '0';
+                arrow.innerHTML = '↓';  // Change the arrow direction to down
+                footerVisible = true;
+            } else {
+                // Slide down the footer and show the arrow
+                footer.style.bottom = '-150px';
+                arrow.innerHTML = '↑';  // Change the arrow direction back to up
+                footerVisible = false;
+            }
+        }
+    </script>
 </body>
 </html>
