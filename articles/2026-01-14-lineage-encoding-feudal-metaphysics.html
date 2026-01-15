@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lineage: Encoding Feudal Metaphysics – Terminal Dispatch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fbfbf9;
+            --card-bg: #ffffff;
+            --text-primary: #121212;
+            --text-secondary: #5a5a5a;
+            --accent-color: #c41e3a;
+            --border-color: #121212;
+            --border-light: #e0e0e0;
+            --font-headline: 'Playfair Display', Georgia, serif;
+            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0d0d0d;
+                --card-bg: #1a1a1a;
+                --text-primary: #f5f5f5;
+                --text-secondary: #a0a0a0;
+                --border-color: #f5f5f5;
+                --border-light: #333;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        a:hover { color: var(--accent-color); }
+        ul, ol { margin-left: 1.5rem; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+        .container-narrow { max-width: 900px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+
+        /* Main */
+        main {
+            flex: 1;
+        }
+
+        /* Masthead */
+        .masthead {
+            text-align: center;
+            padding: 1.5rem 0 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .masthead-date {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .masthead-title {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .masthead-title a {
+            color: inherit;
+        }
+
+        /* Navigation */
+        header {
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Article Header */
+        .article-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 3rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--accent-color);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .article-title {
+            font-family: var(--font-headline);
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto 2rem;
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .article-meta .author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .article-meta .separator {
+            margin: 0 0.5rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            padding-bottom: 4rem;
+        }
+
+        .article-content p {
+            font-size: 1.2rem;
+            line-height: 1.85;
+            margin-bottom: 1.75rem;
+            color: var(--text-primary);
+        }
+
+        .article-content h2 {
+            font-family: var(--font-headline);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.25px;
+        }
+
+        .article-content h3 {
+            font-family: var(--font-headline);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            font-size: 1.2rem;
+            line-height: 1.85;
+            margin-bottom: 1.75rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin: 2.5rem 0;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+        }
+
+        .article-content code {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            background: var(--border-light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .article-content pre {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .article-content a {
+            color: var(--accent-color);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .article-content a:hover {
+            text-decoration: none;
+        }
+
+        /* Drop Cap */
+        .article-content > p:first-of-type::first-letter {
+            font-family: var(--font-headline);
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-right: 0.75rem;
+            padding-top: 0.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* Article Footer */
+        .article-footer {
+            border-top: 1px solid var(--border-light);
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .article-tags a {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+            padding: 0.4rem 0.8rem;
+        }
+
+        .article-tags a:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .back-link {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .back-link a {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 3px double var(--border-color);
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .masthead-title {
+                font-size: 2.5rem;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .article-content p {
+                font-size: 1.1rem;
+            }
+
+            .article-content > p:first-of-type::first-letter {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Masthead -->
+    <div class="masthead">
+        <div class="container">
+            <div class="masthead-date">January 14, 2026</div>
+            <h1 class="masthead-title"><a href="/blog.html">Terminal Dispatch</a></h1>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/projects.html">Projects</a></li>
+                    <li><a href="/blog.html">Articles</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Article Header -->
+        <div class="article-header">
+            <div class="container">
+                <div class="article-category">Systems Design</div>
+                <h1 class="article-title">Lineage: Encoding Feudal Metaphysics</h1>
+                <p class="article-subtitle">How do you model a world where legitimacy flows through bloodlines, power lives in personal oaths, and identity manifests in heraldic symbols?</p>
+                <div class="article-meta">
+                    <span class="author">Evan Wologodzew</span>
+                    <span class="separator">•</span>
+                    <span class="date">January 14, 2026</span>
+                    <span class="separator">•</span>
+                    <span class="reading-time">8 min read</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Content -->
+        <article class="article-content">
+            <div class="container-narrow">
+                
+                <p>The <a href="https://github.com/evanwolo/lineage">Lineage repository</a> is trying to simulate medieval <em>ontology</em>, not just medieval politics. Most strategy games treat feudalism as resource management with fancy hats. Lineage asks a harder question: how do you model a world where legitimacy flows through bloodlines, where power lives in personal oaths, where identity manifests in heraldic symbols?</p>
+
+                <h2>Feudal Ontology as System Architecture</h2>
+
+                <p>Medieval feudalism ran on completely different premises than modern politics. Power wasn't some abstract institutional thing—it was a concrete web of personal relationships. A king wasn't administering a state. He was the top node in a network of vassalage that cascaded downward through layers of sworn oaths. Territory didn't belong to "France" or "England." It belonged to specific nobles who had sworn specific oaths to specific overlords.</p>
+
+                <p>Lineage encodes this through its core <code>WorldState</code> entities: <code>persons</code>, <code>houses</code>, <code>holdings</code>, and <code>crests</code>. Each captures a different ontological layer. Persons are mortal agents who marry, inherit, die. Houses transcend individual lives, maintaining identity through blood descent. Holdings are physical territories bound by vassalage relationships. Crests are the visible symbols that make abstract house identity concrete.</p>
+
+                <p>The architecture reifies feudal metaphysics as first-class objects. Making houses and crests fundamental entities rather than derived properties is a metaphysical bet. It commits the system to a worldview where collective identity and symbolic representation have real ontological weight.</p>
+
+                <h2>Event Sourcing as Medieval Historiography</h2>
+
+                <p>The event-sourced architecture mirrors how medieval people actually thought about history. The <code>WorldReducer</code> rebuilds world states from sequential events, which is exactly how medieval chroniclers worked. They didn't analyze social forces—they recorded events. Births, marriages, oaths, betrayals. History was God's plan unfolding through specific happenings, each one theologically significant.</p>
+
+                <p>Everything in Lineage happens through discrete events like <code>CrestDesigned</code> or dynastic transitions. The simulation unfolds deterministically from initial conditions and random seeds. You can replay it perfectly. This captures the medieval tension between providence and free will—outcomes are already written but not yet revealed. The event log is basically a computational version of divine record.</p>
+
+                <h2>Heraldry and Symbolic Ontology</h2>
+
+                <p>The crest system gets at something important about medieval symbolic thought. Modern logos are arbitrary. They're brand identifiers you could swap out. Medieval heraldry worked differently—a coat of arms didn't just <em>represent</em> a house, it <em>participated in</em> the house's identity. Shield quarterings literally encoded which bloodlines had merged through marriage. Cadency marks maintained the metaphysical hierarchy even within a single family.</p>
+
+                <p>Lineage's crests have <code>primaryColor</code>, <code>secondaryColor</code>, <code>symbol</code>, <code>pattern</code>, and <code>motto</code>—the actual elements of heraldic composition. The <code>CrestGenerator</code> uses deterministic randomness so houses get consistent identities across simulation runs. This makes heraldic identity feel like a Platonic form waiting to be discovered rather than something invented on the spot. The planned features in <code>CREST_SYSTEM.md</code>—inheritance tracking, marriage quartering, cadet branch cadency—show the ambition to model heraldry as a complete symbolic system.</p>
+
+                <h2>Hierarchy as Architecture</h2>
+
+                <p>The modular structure under <code>src/main/java/com/medievalsim/modules</code> echoes the medieval "Great Chain of Being"—the idea that reality is hierarchical layers from the divine down through humans to inanimate matter, each with its proper place. The separation into <code>core</code>, <code>modules</code>, <code>world</code>, and <code>api</code> layers creates a similar ontological hierarchy in code.</p>
+
+                <p>The person-house-holding relationship encodes how individual lives nest within immortal institutions. Persons die. Houses endure across generations. Holdings outlast entire dynasties. This mirrors medieval political theology's concept of the king's "two bodies"—mortal person and immortal office, distinct but unified.</p>
+
+                <h2>Emergence from First Principles</h2>
+
+                <p>What makes Lineage interesting is its commitment to emergence. It doesn't script dynastic conflicts. It creates conditions where such stories become inevitable. When houses bear crests and mottos, when persons belong to houses, when holdings create vassalage networks, complex political dramas just happen.</p>
+
+                <p>This captures how medieval people understood their own world. They weren't characters in a predetermined narrative. They were navigating a fixed moral and social cosmos with clear rules—inheritance laws, vassalage obligations, oath sanctity. These weren't game mechanics. They were the fundamental structure of reality. Lineage builds that cosmos in code and watches what histories emerge.</p>
+
+                <h2>Technical Choices as Metaphysical Statements</h2>
+
+                <p>Event sourcing with Docker and RESTful APIs isn't just technical convenience. Event sourcing means every historical moment is preserved and deterministically reproducible—history as divine record. Separating backend simulation from frontend visualization maintains the distinction between world-as-it-is (the event log) and world-as-it-appears (the React interface). This parallels the medieval distinction between reality and representation, where symbols like crests participated in but didn't exhaust the identities they signified.</p>
+
+                <p>The backend-frontend split embodies a key insight: the simulation's truth exists independent of how it's rendered. The same event history could be visualized as crest galleries, territory maps, genealogical trees. The underlying reality stays constant—only its phenomenal presentation varies.</p>
+
+                <h2>Design as Philosophical Commitment</h2>
+
+                <p>Lineage is a case study in ontological design. The hardest part isn't implementing complex mechanics. It's choosing which aspects of reality to reify as entities. By modeling persons, houses, crests, and holdings as fundamental objects, the simulation commits to feudal metaphysics where identity flows through blood and symbols carry ontological weight.</p>
+
+                <p>This points to a broader principle: game architectures inevitably encode philosophical premises. The entities you model as first-class objects, the relationships you reify, the events you track—these choices don't just affect gameplay. They instantiate particular metaphysical frameworks. Lineage makes this explicit by building a system where feudal ontology isn't flavor text. It's the foundational architecture.</p>
+
+                <p>The repository is still a work in progress, but the ambition is clear: not just simulating medieval politics but constructing a computational universe where feudal metaphysics operates as the actual laws of reality.</p>
+
+            </div>
+        </article>
+
+        <!-- Article Footer -->
+        <div class="article-footer">
+            <div class="container-narrow">
+                <div class="article-tags">
+                    <a href="#">Systems Design</a>
+                    <a href="#">Design</a>
+                    <a href="#">Productivity</a>
+                    <a href="#">Engineering</a>
+                    <a href="#">Game Design</a>
+                    <a href="#">Systems Thinking</a>
+                    <a href="#">Medieval History</a>
+                    <a href="#">Software Architecture</a>
+                </div>
+                <div class="back-link">
+                    ← <a href="/blog.html">Back to all articles</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Terminal Dispatch</div>
+            <div class="footer-tagline">Essays on systems, design, and deliberate living</div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/blog.html">Archive</a>
+                <a href="#">RSS</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

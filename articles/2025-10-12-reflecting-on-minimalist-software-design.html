@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflecting on Minimalist Software Design – Terminal Dispatch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fbfbf9;
+            --card-bg: #ffffff;
+            --text-primary: #121212;
+            --text-secondary: #5a5a5a;
+            --accent-color: #c41e3a;
+            --border-color: #121212;
+            --border-light: #e0e0e0;
+            --font-headline: 'Playfair Display', Georgia, serif;
+            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0d0d0d;
+                --card-bg: #1a1a1a;
+                --text-primary: #f5f5f5;
+                --text-secondary: #a0a0a0;
+                --border-color: #f5f5f5;
+                --border-light: #333;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        a:hover { color: var(--accent-color); }
+        ul, ol { margin-left: 1.5rem; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+        .container-narrow { max-width: 900px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+
+        /* Main */
+        main {
+            flex: 1;
+        }
+
+        /* Masthead */
+        .masthead {
+            text-align: center;
+            padding: 1.5rem 0 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .masthead-date {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .masthead-title {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .masthead-title a {
+            color: inherit;
+        }
+
+        /* Navigation */
+        header {
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Article Header */
+        .article-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 3rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--accent-color);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .article-title {
+            font-family: var(--font-headline);
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto 2rem;
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .article-meta .author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .article-meta .separator {
+            margin: 0 0.5rem;
+        }
+
+        /* Article Content */
+        .article-content {
+            padding-bottom: 4rem;
+        }
+
+        .article-content p {
+            font-size: 1.2rem;
+            line-height: 1.85;
+            margin-bottom: 1.75rem;
+            color: var(--text-primary);
+        }
+
+        .article-content h2 {
+            font-family: var(--font-headline);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-top: 3rem;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.25px;
+        }
+
+        .article-content h3 {
+            font-family: var(--font-headline);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            font-size: 1.2rem;
+            line-height: 1.85;
+            margin-bottom: 1.75rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin: 2.5rem 0;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+        }
+
+        .article-content code {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            background: var(--border-light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .article-content pre {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .article-content a {
+            color: var(--accent-color);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .article-content a:hover {
+            text-decoration: none;
+        }
+
+        /* Drop Cap */
+        .article-content > p:first-of-type::first-letter {
+            font-family: var(--font-headline);
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-right: 0.75rem;
+            padding-top: 0.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* Article Footer */
+        .article-footer {
+            border-top: 1px solid var(--border-light);
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .article-tags a {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+            padding: 0.4rem 0.8rem;
+        }
+
+        .article-tags a:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .back-link {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .back-link a {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 3px double var(--border-color);
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .masthead-title { font-size: 2.5rem; }
+            .article-title { font-size: 2rem; }
+            .article-subtitle { font-size: 1.1rem; }
+            .article-content p { font-size: 1.1rem; }
+            .article-content > p:first-of-type::first-letter { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="masthead">
+        <div class="container">
+            <p class="masthead-date" id="current-date"></p>
+            <h1 class="masthead-title"><a href="/blog.html">Terminal Dispatch</a></h1>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#projects">Projects</a></li>
+                    <li><a href="/blog.html">Articles</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <div class="article-header container">
+                <span class="article-category">Design</span>
+                <h1 class="article-title">Reflecting on Minimalist Software Design</h1>
+                <p class="article-subtitle">In a world of feature bloat and complexity, minimalist design stands out. The principle of doing one thing well applies to software as much as it does to physical products.</p>
+                <p class="article-meta">
+                    By <span class="author">Evan Wologodzew</span>
+                    <span class="separator">·</span>
+                    <time datetime="2025-10-12">October 12, 2025</time>
+                    <span class="separator">·</span>
+                    4 min read
+                </p>
+            </div>
+
+            <div class="article-content container-narrow">
+                <p>In a world of feature bloat and complexity, minimalist design stands out. The principle of doing one thing well applies to software as much as it does to physical products. When we prioritize clarity and purpose over endless features, we create software that resonates with users and stands the test of time.</p>
+
+                <h2>The Philosophy</h2>
+
+                <p>Minimalism in software design isn't about having fewer features—it's about intentional design. Every feature should serve a purpose, and the interface should reflect only what's necessary. This philosophy extends beyond the user interface to the codebase itself, where clarity and simplicity make maintenance easier and bugs less frequent.</p>
+
+                <p>Consider the most successful products in the market today. Many of them share a common trait: they solve one problem exceptionally well. They don't try to be everything to everyone. Instead, they focus on their core value proposition and execute it brilliantly.</p>
+
+                <h2>Benefits</h2>
+
+                <ul>
+                    <li><strong>Clarity</strong>: Users understand what the software does without confusion. There's no guessing, no feature discovery friction.</li>
+                    <li><strong>Maintainability</strong>: Less code means fewer bugs and easier updates. A smaller codebase is easier for new developers to understand.</li>
+                    <li><strong>Performance</strong>: Minimal overhead translates to faster execution. Every feature you don't include is processing power you save.</li>
+                    <li><strong>User Experience</strong>: Less noise allows users to focus on their tasks. The interface gets out of the way.</li>
+                </ul>
+
+                <h2>Examples in Practice</h2>
+
+                <p>Some of the best software follows this principle:</p>
+
+                <ul>
+                    <li><strong>Unix utilities</strong> that do one thing well and combine cleanly with others</li>
+                    <li><strong>Vim's modal editing</strong> approach provides power without complexity</li>
+                    <li><strong>Modern minimalist web design</strong> that prioritizes content and usability</li>
+                    <li><strong>Single-purpose applications</strong> like mpv (media player) that excel at their task</li>
+                </ul>
+
+                <blockquote>
+                    "Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away." — Antoine de Saint-Exupéry
+                </blockquote>
+
+                <h2>The Design Process</h2>
+
+                <p>Achieving minimalism requires discipline. It's easy to add features, but removing them is harder. During design, constantly ask: "Is this necessary? Does it serve our core purpose? What would happen if we removed it?"</p>
+
+                <p>This approach often leads to better decisions than starting with a maximal feature set and trying to trim it down. Constraints breed creativity and force us to think about what truly matters.</p>
+
+                <h2>Conclusion</h2>
+
+                <p>As we move forward into an increasingly complex technological landscape, it's worth questioning whether every feature truly adds value or just adds weight. The software that will endure is the software that respects the user's time and attention. In a world of noise, simplicity is a feature worth pursuing.</p>
+            </div>
+
+            <div class="article-footer container-narrow">
+                <div class="article-tags">
+                    <a href="/blog.html#design">Design</a>
+                    <a href="/blog.html#software">Software</a>
+                    <a href="/blog.html#minimalism">Minimalism</a>
+                </div>
+                <p class="back-link">← <a href="/blog.html">Back to all articles</a></p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-logo">Terminal Dispatch</p>
+            <ul class="footer-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#projects">Projects</a></li>
+                <li><a href="/blog.html">Articles</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+            <p class="footer-copyright">&copy; 2026 Evan Wologodzew. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dateEl = document.getElementById('current-date');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.textContent = new Date().toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Dispatch – Evan Wologodzew</title>
+    <title>All Articles – Terminal Dispatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -77,6 +77,10 @@
             margin-bottom: 0.5rem;
         }
 
+        .masthead-title a {
+            color: inherit;
+        }
+
         /* Navigation */
         header {
             border-bottom: 1px solid var(--border-light);
@@ -110,152 +114,11 @@
             color: var(--text-primary);
         }
 
-        /* Section Header */
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin: 3rem 0 2rem;
-            gap: 1.5rem;
-        }
-
-        .section-header::before,
-        .section-header::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border-light);
-        }
-
-        .section-title {
-            font-family: var(--font-headline);
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--text-secondary);
-        }
-
-        /* Featured Article */
-        .featured-article {
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 3rem;
-            margin-bottom: 2rem;
-        }
-
-        .featured-article .category {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            border: 1px solid var(--accent-color);
-            padding: 0.25rem 0.75rem;
-        }
-
-        .featured-article h2 {
-            font-family: var(--font-headline);
-            font-size: 2.75rem;
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
-        }
-
-        .featured-article h2 a:hover {
-            color: var(--accent-color);
-        }
-
-        .featured-article .byline {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-        }
-
-        .featured-article .byline .author {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .featured-article .excerpt {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            color: var(--text-secondary);
-            max-width: 750px;
-            margin-bottom: 1.5rem;
-        }
-
-        .featured-article .tags {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-        }
-
-        .featured-article .tags a {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-light);
-            padding: 0.3rem 0.7rem;
-        }
-
-        .featured-article .tags a:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        /* Article Grid */
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-        }
-
-        .article {
-            padding-bottom: 2rem;
-        }
-
-        .article .category {
-            display: inline-block;
-            font-size: 0.65rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--accent-color);
-            margin-bottom: 0.75rem;
-        }
-
-        .article h3 {
-            font-family: var(--font-headline);
-            font-size: 1.35rem;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 0.75rem;
-        }
-
-        .article h3 a:hover {
-            color: var(--accent-color);
-        }
-
-        .article .byline {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.75rem;
-        }
-
-        .article .excerpt {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text-secondary);
-        }
-
         /* Category Tabs */
         .category-tabs {
             display: flex;
             gap: 1rem;
-            margin: 2rem 0 3rem;
+            margin: 3rem 0;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -271,6 +134,7 @@
             letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.2s;
+            font-family: var(--font-body);
         }
 
         .category-tab:hover {
@@ -284,34 +148,91 @@
             color: #ffffff;
         }
 
-        /* Divider */
-        .divider {
-            border: none;
-            border-top: 1px solid var(--border-light);
-            margin: 0;
+        /* Articles Feed */
+        .articles-feed {
+            max-width: 800px;
+            margin: 0 auto 4rem;
         }
 
-        .read-more-link {
-            text-align: center;
+        .article-card {
+            border-bottom: 1px solid var(--border-light);
             padding: 3rem 0;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .read-more-link a {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
             transition: all 0.2s;
         }
 
-        .read-more-link a:hover {
+        .article-card:last-child {
+            border-bottom: none;
+        }
+
+        .article-card .category {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            border: 1px solid var(--accent-color);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .article-card h2 {
+            font-family: var(--font-headline);
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .article-card h2 a:hover {
+            color: var(--accent-color);
+        }
+
+        .article-card .byline {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .article-card .byline .author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .article-card .excerpt {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--accent-color);
+            transition: all 0.2s;
+        }
+
+        .read-more:hover {
             background: var(--accent-color);
             color: #ffffff;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
         }
 
         /* Footer */
@@ -350,8 +271,8 @@
 
         @media (max-width: 768px) {
             .masthead-title { font-size: 2.5rem; }
-            .featured-article h2 { font-size: 2rem; }
-            .articles-grid { grid-template-columns: 1fr; }
+            .page-title { font-size: 2rem; }
+            .article-card h2 { font-size: 1.75rem; }
             nav { gap: 1.5rem; }
             .nav-links { gap: 1.5rem; }
         }
@@ -362,7 +283,7 @@
     <div class="masthead">
         <div class="container">
             <p class="masthead-date" id="current-date"></p>
-            <h1 class="masthead-title">Terminal Dispatch</h1>
+            <h1 class="masthead-title"><a href="/blog.html">Terminal Dispatch</a></h1>
         </div>
     </div>
 
@@ -380,25 +301,9 @@
     </header>
 
     <main class="container">
-        <div class="section-header">
-            <span class="section-title">Latest</span>
-        </div>
-        
-        <div id="featured-post"></div>
-        
-        <hr class="divider">
-        
-        <div class="section-header">
-            <span class="section-title">More Articles</span>
-        </div>
-
         <div class="category-tabs" id="category-tabs"></div>
-        
-        <div id="articles-grid" class="articles-grid"></div>
 
-        <div class="read-more-link">
-            <a href="/more-articles.html">View All Articles</a>
-        </div>
+        <div id="articles-container" class="articles-feed"></div>
     </main>
 
     <footer>
@@ -427,8 +332,7 @@
                 category: "Systems Design",
                 author: "Evan Wologodzew",
                 excerpt: "How do you model a world where legitimacy flows through bloodlines, power lives in personal oaths, and identity manifests in heraldic symbols? Building feudal ontology as system architecture.",
-                url: "articles/2026-01-14-lineage-encoding-feudal-metaphysics.html",
-                tags: ["Systems Design", "Design", "Productivity", "Engineering", "Game Design", "Systems Thinking", "Medieval History", "Software Architecture"]
+                url: "articles/2026-01-14-lineage-encoding-feudal-metaphysics.html"
             },
             {
                 title: "Reflecting on Minimalist Software Design",
@@ -456,19 +360,17 @@
             }
         ];
 
-        function renderBlogPosts() {
-            const featuredContainer = document.getElementById('featured-post');
-            const gridContainer = document.getElementById('articles-grid');
+        function renderAllArticles() {
+            const container = document.getElementById('articles-container');
             const tabsContainer = document.getElementById('category-tabs');
             
-            if (!featuredContainer || !gridContainer || !tabsContainer) {
-                console.error('Blog containers not found');
+            if (!container || !tabsContainer) {
+                console.error('Article containers not found');
                 return;
             }
 
             // Get unique categories
             const categories = [...new Set(blogPosts.map(post => post.category))];
-            let selectedCategory = 'All';
 
             // Render category tabs
             const allTab = `<button class="category-tab active" data-category="All">All</button>`;
@@ -478,37 +380,34 @@
             
             tabsContainer.innerHTML = allTab + categoryTabs;
 
-            // Featured post (first one)
-            const featured = blogPosts[0];
-            const featuredTags = featured.tags ? featured.tags.slice(0, 3).map(tag => `<a href="#">${tag}</a>`).join('') : '';
-            featuredContainer.innerHTML = `
-                <article class="featured-article">
-                    <span class="category">${featured.category}</span>
-                    <h2><a href="${featured.url}">${featured.title}</a></h2>
-                    <p class="byline">By <span class="author">${featured.author}</span> · ${featured.date}</p>
-                    <p class="excerpt">${featured.excerpt}</p>
-                    ${featuredTags ? `<div class="tags">${featuredTags}</div>` : ''}
-                </article>
-            `;
-
-            // Function to render grid articles
-            function renderGrid(category) {
+            // Function to render articles
+            function renderArticles(category) {
                 const filtered = category === 'All' 
-                    ? blogPosts.slice(1)
-                    : blogPosts.slice(1).filter(post => post.category === category);
+                    ? blogPosts
+                    : blogPosts.filter(post => post.category === category);
                 
-                gridContainer.innerHTML = filtered.map(post => `
-                    <article class="article">
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state" style="grid-column: 1 / -1;">
+                            <p>No articles found in this category.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = filtered.map(post => `
+                    <article class="article-card">
                         <span class="category">${post.category}</span>
-                        <h3><a href="${post.url}">${post.title}</a></h3>
-                        <p class="byline">${post.date}</p>
+                        <h2><a href="${post.url}">${post.title}</a></h2>
+                        <p class="byline">By <span class="author">${post.author}</span> · ${post.date}</p>
                         <p class="excerpt">${post.excerpt}</p>
+                        <a href="${post.url}" class="read-more">Read Article →</a>
                     </article>
                 `).join('');
             }
 
             // Initial render
-            renderGrid('All');
+            renderArticles('All');
 
             // Tab click handlers
             tabsContainer.querySelectorAll('.category-tab').forEach(tab => {
@@ -518,16 +417,15 @@
                     this.classList.add('active');
                     
                     // Render filtered articles
-                    selectedCategory = this.dataset.category;
-                    renderGrid(selectedCategory);
+                    renderArticles(this.dataset.category);
                 });
             });
         }
 
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', renderBlogPosts);
+            document.addEventListener('DOMContentLoaded', renderAllArticles);
         } else {
-            renderBlogPosts();
+            renderAllArticles();
         }
     </script>
 </body>
