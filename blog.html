@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog – Evan Wologodzew – Developer & Systems Enthusiast</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f5;
+            --card-bg: #ffffff;
+            --text-primary: #18181b;
+            --text-secondary: #71717a;
+            --accent-color: #2563eb;
+            --border-color: #e4e4e7;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #18181b;
+                --card-bg: #27272a;
+                --text-primary: #f4f4f5;
+                --text-secondary: #a1a1aa;
+                --border-color: #3f3f46;
+                --accent-color: #60a5fa;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        a:hover { color: var(--accent-color); }
+        ul { list-style: none; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border-color); margin-bottom: 3rem; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .page-title { font-size: 2rem; font-weight: 800; margin-bottom: 3rem; letter-spacing: -1px; }
+
+        .blog-post {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-color: var(--accent-color);
+        }
+
+        .blog-post h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-post-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: monospace;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .blog-post-excerpt {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+
+        .read-more:hover {
+            opacity: 0.8;
+        }
+
+        footer { margin-top: auto; padding: 2rem 0; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: var(--text-secondary); text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Evan</a>
+                <ul class="nav-links">
+                    <li><a href="/#projects">Projects</a></li>
+                    <li><a href="/blog.html">Blog</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Writing</h1>
+        <div id="blog-posts"></div>
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2026 Evan Wologodzew. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        const blogPosts = [
+            {
+                title: "Reflecting on minimalist software design",
+                date: "Oct 12, 2025",
+                excerpt: "In a world of feature bloat and complexity, minimalist design stands out. The principle of doing one thing well applies to software as much as it does to physical products.",
+                url: "#"
+            },
+            {
+                title: "Why I switched to a tiling window manager",
+                date: "Sep 08, 2025",
+                excerpt: "After years of using traditional desktop environments with floating windows, I made the switch to a tiling window manager. It's been one of the best productivity improvements I've made.",
+                url: "#"
+            },
+            {
+                title: "Understanding Async/Await patterns",
+                date: "Aug 15, 2025",
+                excerpt: "Async/await has become the standard way to handle asynchronous code in modern programming. Whether you're using JavaScript, Python, or Rust, understanding these patterns is essential.",
+                url: "#"
+            }
+        ];
+
+        function renderBlogPosts() {
+            const container = document.getElementById('blog-posts');
+            if (!container) {
+                console.error('Blog posts container not found');
+                return;
+            }
+            container.innerHTML = blogPosts.map(post => `
+                <article class="blog-post">
+                    <h2>${post.title}</h2>
+                    <span class="blog-post-meta">${post.date}</span>
+                    <p class="blog-post-excerpt">${post.excerpt}</p>
+                    <a href="${post.url}" class="read-more">Read more →</a>
+                </article>
+            `).join('');
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderBlogPosts);
+        } else {
+            renderBlogPosts();
+        }
+    </script>
+</body>
+</html>
