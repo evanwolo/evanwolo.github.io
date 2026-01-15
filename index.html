@@ -3,65 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evan Wologodzew</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
-    <script>
-        window.onload = function() {
-            alert("This page features dynamic content");
-        };
-    </script>
-</head>
-<body>
-    <header>
-    
-    </header>
-    <div class="container">
-        <!-- Frosted Glass Business Card as a link -->
-        <a href="https://www.linkedin.com/in/evanwolo/" class="business-card">
-            <div class="card-content">
-                <h2 class="name gradient-text">Evan Wologodzew</h2>
-                <p class="position">Software Engineer</p>
-                <p class="company">RIT</p>
-            </div>
-        </a>
+    <title>Evan – Developer & Systems Enthusiast</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f5;
+            --card-bg: #ffffff;
+            --text-primary: #18181b;
+            --text-secondary: #71717a;
+            --accent-color: #2563eb;
+            --border-color: #e4e4e7;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-        <ul id="directory">
-            <li class="button"><a href="./projects.html">Projects</a></li>
-            <li class="button"><a href="./resume.html">Resume</a></li>
-            <li class="button"><a href="./blog.html">Blog</a></li>
-        </ul>
-
-        <div class="reveal-arrow" onclick="toggleFooter()">↑</div>
-        <div class="contact-text">Contact</div>
-    </div>
-
-    <div class="footer">
-        <ul class="contacts fade-in delay-2" id="conbody">
-            <li><a href="https://github.com/evanwolo"><img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub"></a></li>
-            <li><a href="mailto:emw7437@rit.edu"><img src="https://www.svgrepo.com/show/439751/email-circle.svg" alt="Email"></a></li>
-            <li><a href="https://www.linkedin.com/in/evanwolo/"><img src="https://www.svgrepo.com/show/360538/linkedin-circle.svg" alt="LinkedIn"></a></li>
-        </ul>
-    </div>
-
-    <script>
-        let footerVisible = false;
-
-        // Function to toggle the footer visibility and arrow direction
-        function toggleFooter() {
-            const footer = document.querySelector('.footer');
-            const arrow = document.querySelector('.reveal-arrow');
-
-            if (!footerVisible) {
-                footer.style.bottom = '0';
-                arrow.innerHTML = '↓';
-                footerVisible = true;
-            } else {
-                footer.style.bottom = '-150px';
-                arrow.innerHTML = '↑';
-                footerVisible = false;
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #18181b;
+                --card-bg: #27272a;
+                --text-primary: #f4f4f5;
+                --text-secondary: #a1a1aa;
+                --border-color: #3f3f46;
+                --accent-color: #60a5fa;
             }
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        a:hover { color: var(--accent-color); }
+        ul { list-style: none; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border-color); margin-bottom: 3rem; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .hero { margin-bottom: 4rem; }
+        .hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -1px; }
+        .hero p { font-size: 1.125rem; color: var(--text-secondary); max-width: 60ch; }
+
+        section { margin-bottom: 4rem; }
+        .section-title { 
+            font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: var(--accent-color); }
+        .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .card p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .tech-stack { display: flex; gap: 0.5rem; font-size: 0.75rem; color: var(--text-secondary); font-family: monospace; }
+
+        .blog-item { display: flex; justify-content: space-between; align-items: baseline; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color); }
+        .blog-item:last-child { border-bottom: none; }
+        .blog-date { font-size: 0.85rem; color: var(--text-secondary); font-family: monospace; }
+
+        footer { margin-top: auto; padding: 2rem 0; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: var(--text-secondary); text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Evan</a>
+                <ul class="nav-links">
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section class="hero">
+            <h1 id="greeting">Hello, I'm a Developer.</h1>
+            <p>
+                I build accessible, performant, and minimalist web experiences. 
+                Currently exploring systems programming, strategy games tooling, and clean design.
+            </p>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="grid">
+                <a href="#" class="card">
+                    <h3>Rust Data Aggregator</h3>
+                    <p>A high-performance API designed for complex data pipelines and automation.</p>
+                    <div class="tech-stack">
+                        <span>Rust</span> <span>•</span> <span>Docker</span>
+                    </div>
+                </a>
+
+                <a href="#" class="card">
+                    <h3>Portfolio v1</h3>
+                    <p>Minimalist personal website built with plain HTML and CSS for speed and clarity.</p>
+                    <div class="tech-stack">
+                        <span>HTML</span> <span>•</span> <span>CSS</span>
+                    </div>
+                </a>
+
+                <a href="#" class="card">
+                    <h3>OOTP Stats Tool</h3>
+                    <p>A helper utility for tracking player stats and simulating baseball scenarios.</p>
+                    <div class="tech-stack">
+                        <span>Python</span> <span>•</span> <span>SQLite</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="blog">
+            <h2 class="section-title">Recent Writing</h2>
+            <div class="blog-list">
+                <a href="#" class="blog-item">
+                    <span>Reflecting on minimalist software design</span>
+                    <span class="blog-date">Oct 12, 2025</span>
+                </a>
+                <a href="#" class="blog-item">
+                    <span>Why I switched to a tiling window manager</span>
+                    <span class="blog-date">Sep 08, 2025</span>
+                </a>
+                <a href="#" class="blog-item">
+                    <span>Understanding Async/Await patterns</span>
+                    <span class="blog-date">Aug 15, 2025</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Connect</h2>
+            <p style="color: var(--text-secondary);">
+                Reach out via <a href="mailto:evan@example.com" style="text-decoration: underline;">email</a> 
+                or find me on <a href="https://github.com/evan" style="text-decoration: underline;">GitHub</a>.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2026 Evan. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const greetingElement = document.getElementById('greeting');
+            const hour = new Date().getHours();
+            let greetingText = 'Hello';
+
+            if (hour < 12) greetingText = 'Good morning';
+            else if (hour < 18) greetingText = 'Good afternoon';
+            else greetingText = 'Good evening';
+
+            greetingElement.textContent = `${greetingText}, I'm a Developer.`;
+            console.log('Personal portfolio loaded successfully');
+        });
     </script>
 </body>
 </html>
