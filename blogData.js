@@ -6,7 +6,7 @@ const blogPosts = [
         category: "Critical Analysis",
         author: "Evan Wologodzew",
         excerpt: "When frameworks designed to detect power encounter sacramental communion, they mistake their own blindness for hidden operations.",
-        url: "/articles/2026-01-15-when-the-knapsack-doesnt-fit.html",
+        url: "/articles/2026-01-15-the-kingdom-the-state-cannot-see.html",
         tags: ["Critical Analysis", "Theology", "Orthodox Christianity", "Social Theory", "Philosophy", "Political Thought", "Religious Freedom"],
         series: null, // Can be set to group articles into series
         seriesOrder: null // Order within series (1, 2, 3, etc.)
