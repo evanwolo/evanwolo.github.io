@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="/blogData.js"></script>
     <style>
         :root {
             --bg-color: #fbfbf9;
@@ -96,12 +97,14 @@
             justify-content: center;
             align-items: center;
             padding: 1rem 0;
+            position: relative;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
+            justify-content: center;
         }
 
         .nav-links a {
@@ -114,6 +117,257 @@
 
         .nav-links a:hover {
             color: var(--text-primary);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            background: none;
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem 0.75rem;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 0;
+        }
+
+        .dark-mode-toggle:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Table of Contents */
+        .toc-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .toc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .toc-title {
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .toc-toggle {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0;
+        }
+
+        .toc-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .toc-list a:hover {
+            color: var(--accent-color);
+        }
+
+        .toc-list .toc-h3 {
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .toc-list.collapsed {
+            display: none;
+        }
+
+        /* Series Navigation */
+        .series-navigation {
+            background: var(--card-bg);
+            border-left: 3px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .series-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .series-name {
+            font-family: var(--font-headline);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .series-progress {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .series-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .series-link {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem;
+            border: 1px solid var(--border-light);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .series-link:hover {
+            border-color: var(--accent-color);
+        }
+
+        .series-link-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .series-link-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Social Share Buttons */
+        .social-share {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .share-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-right: 0.5rem;
+            align-self: center;
+        }
+
+        .share-button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-light);
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .share-button:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Related Articles */
+        .related-articles {
+            border-top: 1px solid var(--border-light);
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+
+        .related-title {
+            font-family: var(--font-headline);
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .related-article {
+            border: 1px solid var(--border-light);
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .related-article:hover {
+            border-color: var(--accent-color);
+        }
+
+        .related-article .category {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .related-article h3 {
+            font-family: var(--font-headline);
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+
+        .related-article h3 a {
+            color: var(--text-primary);
+        }
+
+        .related-article h3 a:hover {
+            color: var(--accent-color);
+        }
+
+        .related-article .excerpt {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
         }
 
         /* Article Header */
@@ -368,8 +622,9 @@
     <!-- Masthead -->
     <div class="masthead">
         <div class="container">
-            <div class="masthead-date">January 14, 2026</div>
-            <h1 class="masthead-title"><a href="/blog.html">Terminal Dispatch</a></h1>
+            <p class="masthead-date" id="current-date"></p>
+            <h1 class="masthead-title"><a href="/dispatch/">Terminal Dispatch</a></h1>
+            <p class="masthead-subtitle">Ancient Faith. Modern Systems.</p>
         </div>
     </div>
 
@@ -378,10 +633,14 @@
         <div class="container">
             <nav>
                 <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/projects.html">Projects</a></li>
-                    <li><a href="/blog.html">Articles</a></li>
+                    <li><a href="/">← Portfolio</a></li>
+                    <li><a href="/dispatch/">Latest</a></li>
+                    <li><a href="/dispatch/archive.html">Archive</a></li>
+                    <li><a href="/dispatch/contact.html">Contact</a></li>
                 </ul>
+                <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <span class="icon">☾</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -398,14 +657,20 @@
                     <span class="separator">•</span>
                     <span class="date">January 14, 2026</span>
                     <span class="separator">•</span>
-                    <span class="reading-time">8 min read</span>
+                    <span class="reading-time" id="reading-time">8 min read</span>
                 </div>
             </div>
         </div>
 
+        <!-- Series Navigation (if article is part of a series) -->
+        <div id="series-navigation" class="container-narrow"></div>
+
+        <!-- Table of Contents -->
+        <div id="toc-container" class="container-narrow"></div>
+
         <!-- Article Content -->
         <article class="article-content">
-            <div class="container-narrow">
+            <div class="container-narrow" id="article-content">
                 
                 <p>The <a href="https://github.com/evanwolo/lineage">Lineage repository</a> is trying to simulate medieval <em>ontology</em>, not just medieval politics. Most strategy games treat feudalism as resource management with fancy hats. Lineage asks a harder question: how do you model a world where legitimacy flows through bloodlines, where power lives in personal oaths, where identity manifests in heraldic symbols?</p>
 
@@ -458,6 +723,16 @@
             </div>
         </article>
 
+        <!-- Social Share Buttons -->
+        <div class="container-narrow">
+            <div class="social-share" id="social-share">
+                <span class="share-label">Share:</span>
+            </div>
+        </div>
+
+        <!-- Related Articles -->
+        <div id="related-articles" class="container-narrow"></div>
+
         <!-- Article Footer -->
         <div class="article-footer">
             <div class="container-narrow">
@@ -472,7 +747,7 @@
                     <a href="#">Software Architecture</a>
                 </div>
                 <div class="back-link">
-                    ← <a href="/blog.html">Back to all articles</a>
+                    ← <a href="/dispatch/">Back to all articles</a>
                 </div>
             </div>
         </div>
@@ -486,11 +761,243 @@
             <div class="footer-tagline">Essays on systems, design, and deliberate living</div>
             <div class="footer-links">
                 <a href="/">Home</a>
-                <a href="/blog.html">Archive</a>
+                <a href="/dispatch/archive.html">Archive</a>
                 <a href="#">RSS</a>
             </div>
         </div>
     </footer>
 
+    <script>
+        // Set current date in masthead
+        const dateEl = document.getElementById('current-date');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.textContent = new Date().toLocaleDateString('en-US', options);
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        function updateDarkMode(isDark) {
+            document.documentElement.style.setProperty('--bg-color', isDark ? '#0d0d0d' : '#fbfbf9');
+            document.documentElement.style.setProperty('--card-bg', isDark ? '#1a1a1a' : '#ffffff');
+            document.documentElement.style.setProperty('--text-primary', isDark ? '#f5f5f5' : '#121212');
+            document.documentElement.style.setProperty('--text-secondary', isDark ? '#a0a0a0' : '#5a5a5a');
+            document.documentElement.style.setProperty('--border-color', isDark ? '#f5f5f5' : '#121212');
+            document.documentElement.style.setProperty('--border-light', isDark ? '#333' : '#e0e0e0');
+            darkModeToggle.querySelector('.icon').textContent = isDark ? '☀' : '☾';
+            localStorage.setItem('darkMode', isDark);
+        }
+        
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode !== null) {
+            updateDarkMode(savedMode === 'true');
+        } else {
+            updateDarkMode(prefersDark.matches);
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            updateDarkMode(!isDark);
+        });
+
+        // Calculate and display reading time
+        const articleContent = document.getElementById('article-content');
+        if (articleContent && typeof calculateReadingTime === 'function') {
+            const readingTime = calculateReadingTime(articleContent.textContent);
+            const readingTimeEl = document.getElementById('reading-time');
+            if (readingTimeEl) {
+                readingTimeEl.textContent = `${readingTime} min read`;
+            }
+        }
+
+        // Generate Table of Contents
+        if (articleContent && typeof extractHeadings === 'function') {
+            const headings = extractHeadings(articleContent);
+            const tocContainer = document.getElementById('toc-container');
+            
+            if (headings.length > 0 && tocContainer) {
+                let tocHTML = `
+                    <div class="toc-container">
+                        <div class="toc-header">
+                            <h2 class="toc-title">Table of Contents</h2>
+                            <button class="toc-toggle" id="toc-toggle">Hide</button>
+                        </div>
+                        <ul class="toc-list" id="toc-list">
+                `;
+                
+                headings.forEach(heading => {
+                    const className = heading.level === 'h3' ? 'toc-h3' : '';
+                    tocHTML += `<li class="${className}"><a href="#${heading.id}">${heading.text}</a></li>`;
+                });
+                
+                tocHTML += `</ul></div>`;
+                tocContainer.innerHTML = tocHTML;
+                
+                // TOC toggle functionality
+                const tocToggle = document.getElementById('toc-toggle');
+                const tocList = document.getElementById('toc-list');
+                
+                tocToggle.addEventListener('click', () => {
+                    tocList.classList.toggle('collapsed');
+                    tocToggle.textContent = tocList.classList.contains('collapsed') ? 'Show' : 'Hide';
+                });
+                
+                // Smooth scroll for TOC links
+                tocContainer.querySelectorAll('a[href^="#"]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(link.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                });
+            }
+        }
+
+        // Series Navigation
+        const currentUrl = window.location.pathname;
+        if (typeof getSeriesArticles === 'function') {
+            const series = getSeriesArticles(currentUrl);
+            const seriesNav = document.getElementById('series-navigation');
+            
+            if (series && seriesNav) {
+                let seriesHTML = `
+                    <div class="series-navigation">
+                        <div class="series-title">Part of a Series</div>
+                        <h2 class="series-name">${series.title}</h2>
+                        <p class="series-progress">Part ${series.current} of ${series.total}</p>
+                        <div class="series-links">
+                `;
+                
+                if (series.previous) {
+                    seriesHTML += `
+                        <a href="${series.previous.url}" class="series-link">
+                            <div class="series-link-label">← Previous</div>
+                            <div class="series-link-title">${series.previous.title}</div>
+                        </a>
+                    `;
+                }
+                
+                if (series.next) {
+                    seriesHTML += `
+                        <a href="${series.next.url}" class="series-link">
+                            <div class="series-link-label">Next →</div>
+                            <div class="series-link-title">${series.next.title}</div>
+                        </a>
+                    `;
+                }
+                
+                seriesHTML += `</div></div>`;
+                seriesNav.innerHTML = seriesHTML;
+            }
+        }
+
+        // Social Share Buttons
+        const shareContainer = document.getElementById('social-share');
+        if (shareContainer) {
+            const pageTitle = document.querySelector('.article-title').textContent;
+            const pageUrl = window.location.href;
+            
+            const shareButtons = [
+                {
+                    name: 'Twitter',
+                    url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(pageTitle)}&url=${encodeURIComponent(pageUrl)}`,
+                    icon: '✕'
+                },
+                {
+                    name: 'LinkedIn',
+                    url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`,
+                    icon: 'in'
+                },
+                {
+                    name: 'Email',
+                    url: `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(pageUrl)}`,
+                    icon: '✉'
+                }
+            ];
+            
+            let buttonsHTML = shareButtons.map(btn => 
+                `<a href="${btn.url}" class="share-button" target="_blank" rel="noopener">${btn.icon} ${btn.name}</a>`
+            ).join('');
+            
+            // Add copy link button
+            buttonsHTML += `<button class="share-button" id="copy-link-btn">⎘ Copy Link</button>`;
+            
+            shareContainer.innerHTML = '<span class="share-label">Share:</span>' + buttonsHTML;
+            
+            // Copy link functionality
+            const copyBtn = document.getElementById('copy-link-btn');
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(pageUrl);
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = '✓ Copied!';
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                }
+            });
+            
+            // Web Share API support
+            if (navigator.share) {
+                const webShareBtn = document.createElement('button');
+                webShareBtn.className = 'share-button';
+                webShareBtn.textContent = '📤 Share';
+                webShareBtn.addEventListener('click', async () => {
+                    try {
+                        await navigator.share({
+                            title: pageTitle,
+                            url: pageUrl
+                        });
+                    } catch (err) {
+                        console.log('Share cancelled or failed');
+                    }
+                });
+                shareContainer.appendChild(webShareBtn);
+            }
+        }
+
+        // Related Articles
+        if (typeof getRelatedArticles === 'function') {
+            const relatedArticles = getRelatedArticles(currentUrl, 3);
+            const relatedContainer = document.getElementById('related-articles');
+            
+            if (relatedArticles.length > 0 && relatedContainer) {
+                let relatedHTML = `
+                    <div class="related-articles">
+                        <h2 class="related-title">Related Articles</h2>
+                        <div class="related-grid">
+                `;
+                
+                relatedArticles.forEach(article => {
+                    relatedHTML += `
+                        <article class="related-article">
+                            <span class="category">${article.category}</span>
+                            <h3><a href="${article.url}">${article.title}</a></h3>
+                            <p class="excerpt">${article.excerpt}</p>
+                        </article>
+                    `;
+                });
+                
+                relatedHTML += `</div></div>`;
+                relatedContainer.innerHTML = relatedHTML;
+            }
+        }
+
+        // Display last updated timestamp
+        const lastModified = new Date(document.lastModified);
+        const articleDate = new Date('2026-01-14');
+        if (lastModified > articleDate) {
+            const metaEl = document.querySelector('.article-meta');
+            if (metaEl) {
+                const updateSpan = document.createElement('span');
+                updateSpan.innerHTML = '<span class="separator">·</span><span style="font-style: italic; color: var(--text-secondary);">Updated ' + lastModified.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + '</span>';
+                metaEl.appendChild(updateSpan);
+            }
+        }
+    </script>
 </body>
 </html>

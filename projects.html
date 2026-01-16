@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects – Evan</title>
+    <script src="/blogData.js"></script>
     <style>
         :root {
             --bg-color: #f4f4f5;
@@ -49,6 +50,27 @@
         .nav-links { display: flex; gap: 1.5rem; }
         .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); }
         .nav-links a:hover { color: var(--text-primary); }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem 0.75rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark-mode-toggle:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
 
         .page-header { margin-bottom: 4rem; }
         .page-header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -1px; }
@@ -187,8 +209,12 @@
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="/projects.html">Projects</a></li>
-                    <li><a href="/blog.html">Blog</a></li>
+                    <li><a href="/resume.html">Resume</a></li>
+                    <li><a href="/dispatch/">Terminal Dispatch</a></li>
                 </ul>
+                <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <span class="icon">☾</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -229,6 +255,20 @@
                     </div>
                     <div class="project-meta">
                         <a href="https://github.com/evanwolo/emergent-civ-sim" class="project-link">View Source →</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="status active">Active</div>
+                    <h3>FastX 4 Lab Cluster</h3>
+                    <div class="tech-stack">
+                        <span>Ansible</span> <span>•</span> <span>NATS</span> <span>•</span> <span>AutoFS</span> <span>•</span> <span>NVIDIA GPU</span> <span>•</span> <span>SSSD/AD</span>
+                    </div>
+                    <div class="description">
+                        <p>Enterprise remote desktop infrastructure serving GPU-accelerated GNOME sessions across 32 workstations. Three-tier architecture: redundant web gateways with AD authentication, NATS messaging mesh for control plane, and compute nodes with NVIDIA hardware encoding. Fully automated with Ansible—shared state via NAS, UID parity enforcement, and systemd role differentiation.</p>
+                    </div>
+                    <div class="project-meta">
+                        <a href="#" class="project-link">View Docs →</a>
                     </div>
                 </div>
 
@@ -327,6 +367,35 @@
             © 2026 Evan Wologodzew. Built with intention.
         </div>
     </footer>
+
+    <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        function updateDarkMode(isDark) {
+            document.documentElement.style.setProperty('--bg-color', isDark ? '#18181b' : '#f4f4f5');
+            document.documentElement.style.setProperty('--card-bg', isDark ? '#27272a' : '#ffffff');
+            document.documentElement.style.setProperty('--text-primary', isDark ? '#f4f4f5' : '#18181b');
+            document.documentElement.style.setProperty('--text-secondary', isDark ? '#a1a1aa' : '#71717a');
+            document.documentElement.style.setProperty('--border-color', isDark ? '#3f3f46' : '#e4e4e7');
+            document.documentElement.style.setProperty('--accent-color', isDark ? '#60a5fa' : '#2563eb');
+            darkModeToggle.querySelector('.icon').textContent = isDark ? '☀' : '☾';
+            localStorage.setItem('darkMode', isDark);
+        }
+        
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode !== null) {
+            updateDarkMode(savedMode === 'true');
+        } else {
+            updateDarkMode(prefersDark.matches);
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            updateDarkMode(!isDark);
+        });
+    </script>
 
 </body>
 </html>

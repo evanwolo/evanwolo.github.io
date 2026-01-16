@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume – Evan Wologodzew</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f5;
+            --card-bg: #ffffff;
+            --text-primary: #18181b;
+            --text-secondary: #71717a;
+            --accent-color: #2563eb;
+            --border-color: #e4e4e7;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #18181b;
+                --card-bg: #27272a;
+                --text-primary: #f4f4f5;
+                --text-secondary: #a1a1aa;
+                --border-color: #3f3f46;
+                --accent-color: #60a5fa;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        a:hover { color: var(--accent-color); }
+        ul { list-style: none; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+
+        header { padding: 2rem 0; border-bottom: 1px solid var(--border-color); margin-bottom: 3rem; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-secondary); }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem 0.75rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark-mode-toggle:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .page-header { margin-bottom: 3rem; }
+        .page-header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+        .contact-info a {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        .contact-info span::before {
+            content: '•';
+            margin-right: 1rem;
+            color: var(--border-color);
+        }
+        .contact-info span:first-child::before {
+            content: '';
+            margin-right: 0;
+        }
+
+        section { margin-bottom: 3rem; }
+        .section-title { 
+            font-size: 1.25rem; 
+            font-weight: 700; 
+            margin-bottom: 1.5rem; 
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            gap: 1.25rem;
+        }
+        .skill-row {
+            display: flex;
+            gap: 1rem;
+            align-items: baseline;
+        }
+        .skill-category {
+            font-weight: 600;
+            min-width: 140px;
+            color: var(--text-primary);
+        }
+        .skill-list {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Experience & Education Cards */
+        .card { 
+            background: var(--card-bg); 
+            border: 2px solid var(--border-color); 
+            border-radius: 12px; 
+            padding: 2rem; 
+            margin-bottom: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+            transform: scaleY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1); 
+            border-color: var(--accent-color);
+        }
+        .card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .card h3 { 
+            font-size: 1.25rem; 
+            font-weight: 700; 
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+        .card .organization {
+            font-size: 1rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        .card .date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .card .location {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .card li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        .card li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Tech Stack */
+        .tech-stack { 
+            display: flex; 
+            flex-wrap: wrap;
+            gap: 0.5rem; 
+            font-size: 0.75rem; 
+            color: var(--text-secondary); 
+            font-family: monospace; 
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        .tech-stack span {
+            padding: 0.25rem 0.6rem;
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        /* Projects Section */
+        .project-card {
+            background: var(--card-bg); 
+            border: 2px solid var(--border-color); 
+            border-radius: 12px; 
+            padding: 1.75rem; 
+            margin-bottom: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .project-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08); 
+            border-color: var(--accent-color);
+        }
+        .project-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .project-card h3 a {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .project-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.75rem;
+        }
+        .project-card li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .project-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Education */
+        .education-card .courses {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .education-card .courses-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .education-card .courses-list {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Print Button */
+        .print-btn {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .print-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        footer { 
+            margin-top: auto; 
+            padding: 2rem 0; 
+            border-top: 1px solid var(--border-color); 
+            font-size: 0.9rem; 
+            color: var(--text-secondary); 
+            text-align: center; 
+        }
+
+        @media print {
+            header, footer, .print-btn, .dark-mode-toggle { display: none; }
+            body { background: white; color: black; }
+            .card, .project-card { 
+                box-shadow: none; 
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+            .card:hover, .project-card:hover { transform: none; }
+        }
+
+        @media (max-width: 600px) {
+            .card-header { flex-direction: column; }
+            .skill-row { flex-direction: column; gap: 0.25rem; }
+            .skill-category { min-width: auto; }
+            .contact-info { flex-direction: column; gap: 0.5rem; }
+            .contact-info span::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">Evan</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/projects.html">Projects</a></li>
+                    <li><a href="/resume.html">Resume</a></li>
+                    <li><a href="/dispatch/">Terminal Dispatch</a></li>
+                </ul>
+                <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <span class="icon">☾</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="page-header">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                <h1>Evan Wologodzew</h1>
+                <button class="print-btn" onclick="window.print()">
+                    <span>🖨</span> Print / Save PDF
+                </button>
+            </div>
+            <div class="contact-info">
+                <span>evanmwolo@gmail.com</span>
+                <span>+1 203 910 3282</span>
+                <span><a href="https://github.com/evanwolo" target="_blank">github.com/evanwolo</a></span>
+                <span><a href="https://linkedin.com/in/evanwolo" target="_blank">linkedin.com/in/evanwolo</a></span>
+            </div>
+        </div>
+
+        <section>
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-row">
+                    <span class="skill-category">Languages</span>
+                    <span class="skill-list">Java, Python, JavaScript, HTML/CSS, C, C++, C#, Bash</span>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-category">DevOps</span>
+                    <span class="skill-list">Linux (RHEL, Ubuntu), Docker, Podman, Ansible, GitLab CI/CD, Microsoft Intune, PowerShell</span>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-category">Tools & Frameworks</span>
+                    <span class="skill-list">Node.js, React, Vite, PostgreSQL, MySQL, .NET/ASP.NET</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>Linux & Research Systems Administrator Co-Op</h3>
+                        <span class="organization">RIT KGCOE EME</span>
+                        <span class="location">Rochester, NY</span>
+                    </div>
+                    <span class="date">May 2025 – Present</span>
+                </div>
+                <ul>
+                    <li>Assisted department systems administrator with providing support for research and academic computing environments, maintaining lab uptime and solving workflow issues for faculty and staff.</li>
+                    <li>Designed distributed FastX compute cluster encompassing 48+ nodes, delivering high-availability remote Linux desktop environments to electrical engineering students and research groups.</li>
+                    <li>Facilitated Intune deployment across 200+ academic lab endpoints, migrating from SCCM to modern MDM with zero downtime during academic term.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3>Lead Mentor</h3>
+                        <span class="organization">Robotics & Beyond</span>
+                        <span class="location">New Milford, CT</span>
+                    </div>
+                    <span class="date">Jan 2017 – Aug 2023</span>
+                </div>
+                <ul>
+                    <li>Designed and delivered Java and Python programming curriculum to 40+ students annually, emphasizing OOP principles and algorithmic problem-solving, preparing students for AP Computer Science coursework.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Projects</h2>
+
+            <div class="project-card">
+                <h3>
+                    FastX4 Distributed Compute Cluster
+                    <a href="#" target="_blank">View Docs →</a>
+                </h3>
+                <div class="tech-stack">
+                    <span>FastX</span>
+                    <span>NATS</span>
+                    <span>Ansible</span>
+                    <span>Bash</span>
+                </div>
+                <ul>
+                    <li>Architected fault-tolerant compute cluster with gateway layer and NATS messaging mesh, serving 200+ users across 48+ nodes with automated Ansible provisioning reducing deployment time and allowing for ease of scalability.</li>
+                    <li>Implemented Podman based session isolation with load balancing configuration, distributing ephemeral container workloads across nodes based on session and resource constraints.</li>
+                    <li>Resolved critical local/remote session concurrency resource conflicts, ensuring predictable and expected performance for both local power users and remote containerized sessions.</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>
+                    Fantasy Baseball D&D Game
+                    <a href="https://github.com/evanwolo/dugouts-dragons" target="_blank">github.com/evanwolo/dugouts-dragons</a>
+                </h3>
+                <div class="tech-stack">
+                    <span>Java</span>
+                    <span>React</span>
+                    <span>PostgreSQL</span>
+                </div>
+                <ul>
+                    <li>Built turn-based game engine with custom probability system simulating statistical matchups between batter attributes (power, contact, speed) and pitcher sequencing (velocity, break, location), generating realistic at-bat outcomes.</li>
+                    <li>Designed React frontend with PostgreSQL backend for persistent player progression, team & roster management, and season statistics, supporting multiplayer campaign mode with real-time game state synchronization.</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>
+                    Civilizational Propagation Simulator
+                    <a href="https://github.com/evanwolo/emergent-sim-civ" target="_blank">github.com/evanwolo/emergent-sim-civ</a>
+                </h3>
+                <div class="tech-stack">
+                    <span>C++</span>
+                    <span>CMake</span>
+                    <span>Docker</span>
+                </div>
+                <ul>
+                    <li>Implemented agent-based simulation modeling the emergence of social movements and political factions through individual belief evolution, personality-driven interactions, and economic incentive structures across populations of millions of agents.</li>
+                    <li>Developed a Watts-Strogatz small-world network topology for opinion propagation, replicating real-world information spread patterns with configurable clustering coefficients and rewiring probabilities.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Education</h2>
+            
+            <div class="card education-card">
+                <div class="card-header">
+                    <div>
+                        <h3>BS Web & Mobile Computing</h3>
+                        <span class="organization">Rochester Institute of Technology</span>
+                    </div>
+                    <span class="date">Expected 2026</span>
+                </div>
+                <div class="courses">
+                    <div class="courses-label">Relevant Coursework</div>
+                    <div class="courses-list">Client-Server Applications, Project Management, Database Administration, Algorithmic Analysis, RESTful API, Secure Web Applications, Micro/Macroeconomics</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2026 Evan Wologodzew. Built with intention.
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        function updateDarkMode(isDark) {
+            document.documentElement.style.setProperty('--bg-color', isDark ? '#18181b' : '#f4f4f5');
+            document.documentElement.style.setProperty('--card-bg', isDark ? '#27272a' : '#ffffff');
+            document.documentElement.style.setProperty('--text-primary', isDark ? '#f4f4f5' : '#18181b');
+            document.documentElement.style.setProperty('--text-secondary', isDark ? '#a1a1aa' : '#71717a');
+            document.documentElement.style.setProperty('--border-color', isDark ? '#3f3f46' : '#e4e4e7');
+            document.documentElement.style.setProperty('--accent-color', isDark ? '#60a5fa' : '#2563eb');
+            darkModeToggle.querySelector('.icon').textContent = isDark ? '☀' : '☾';
+            localStorage.setItem('darkMode', isDark);
+        }
+        
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode !== null) {
+            updateDarkMode(savedMode === 'true');
+        } else {
+            updateDarkMode(prefersDark.matches);
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            updateDarkMode(!isDark);
+        });
+    </script>
+
+</body>
+</html>

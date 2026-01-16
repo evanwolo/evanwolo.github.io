@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal Dispatch – Evan Wologodzew</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapbrois.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -77,6 +77,14 @@
             margin-bottom: 0.5rem;
         }
 
+        .masthead-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
         /* Navigation */
         header {
             border-bottom: 1px solid var(--border-light);
@@ -96,6 +104,7 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+            justify-content: center;
         }
 
         .nav-links a {
@@ -210,11 +219,51 @@
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
+            gap: 0;
         }
 
         .article {
-            padding-bottom: 2rem;
+            position: relative;
+            padding: 2.5rem;
+            border: 1px solid var(--border-light);
+            margin: -1px 0 0 -1px;
+            background: var(--bg-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .article::before {
+            content: attr(data-index);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-family: var(--font-headline);
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--border-light);
+            line-height: 1;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .article:hover {
+            background: var(--card-bg);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            z-index: 10;
+        }
+
+        .article:hover::before {
+            color: var(--accent-color);
+            opacity: 0.2;
+            transform: scale(1.1);
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
         .article .category {
@@ -224,7 +273,22 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: var(--accent-color);
-            margin-bottom: 0.75rem;
+        }
+
+        .article .reading-time {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .article .reading-time::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--border-light);
+            border-radius: 50%;
         }
 
         .article h3 {
@@ -233,10 +297,21 @@
             font-weight: 600;
             line-height: 1.3;
             margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .article h3 a {
+            background-image: linear-gradient(var(--accent-color), var(--accent-color));
+            background-size: 0% 2px;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.3s ease, color 0.2s;
         }
 
         .article h3 a:hover {
             color: var(--accent-color);
+            background-size: 100% 2px;
         }
 
         .article .byline {
@@ -249,39 +324,149 @@
             font-size: 0.95rem;
             line-height: 1.6;
             color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .article .read-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .article .read-arrow::after {
+            content: '→';
+            transition: transform 0.2s ease;
+        }
+
+        .article:hover .read-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .article:hover .read-arrow:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Staggered animation on load */
+        .article {
+            animation: fadeSlideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .article:nth-child(1) { animation-delay: 0.1s; }
+        .article:nth-child(2) { animation-delay: 0.15s; }
+        .article:nth-child(3) { animation-delay: 0.2s; }
+        .article:nth-child(4) { animation-delay: 0.25s; }
+        .article:nth-child(5) { animation-delay: 0.3s; }
+        .article:nth-child(6) { animation-delay: 0.35s; }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Re-trigger animation on filter */
+        .article.animate-in {
+            animation: fadeSlideIn 0.4s ease forwards;
+        }
+
+        /* Empty state */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+            font-style: italic;
         }
 
         /* Category Tabs */
         .category-tabs {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             margin: 2rem 0 3rem;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .category-tab {
-            padding: 0.6rem 1.2rem;
-            border: 1px solid var(--border-light);
+            padding: 0.6rem 1.4rem;
+            border: none;
+            border-radius: 50px;
             background: transparent;
             color: var(--text-secondary);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 50px;
+        }
+
+        .category-tab span {
+            position: relative;
+            z-index: 1;
         }
 
         .category-tab:hover {
-            border-color: var(--accent-color);
             color: var(--accent-color);
+            background: rgba(196, 30, 58, 0.08);
         }
 
         .category-tab.active {
             background: var(--accent-color);
-            border-color: var(--accent-color);
             color: #ffffff;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .category-tab.active:hover {
+            background: var(--accent-color);
+            color: #ffffff;
+        }
+
+        .articles-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 1.4rem;
+            height: 1.4rem;
+            margin-left: 0.5rem;
+            padding: 0 0.4rem;
+            border-radius: 50px;
+            background: rgba(0,0,0,0.1);
+            font-size: 0.6rem;
+            font-weight: 700;
+        }
+
+        .category-tab.active .articles-count {
+            background: rgba(255,255,255,0.25);
         }
 
         /* Divider */
@@ -291,27 +476,64 @@
             margin: 0;
         }
 
+        .section-intro {
+            text-align: center;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: -1rem auto 0;
+            font-style: italic;
+        }
+
         .read-more-link {
             text-align: center;
-            padding: 3rem 0;
+            padding: 3.5rem 0;
             border-top: 1px solid var(--border-light);
+            margin-top: 1px;
         }
 
         .read-more-link a {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border: 1px solid var(--accent-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border: 2px solid var(--accent-color);
             color: var(--accent-color);
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .read-more-link a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent-color);
+            transform: translateX(-101%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .read-more-link a span,
+        .read-more-link a svg {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
         }
 
         .read-more-link a:hover {
-            background: var(--accent-color);
             color: #ffffff;
+        }
+
+        .read-more-link a:hover::before {
+            transform: translateX(0);
+        }
+
+        .read-more-link a:hover svg {
+            transform: translateX(4px);
         }
 
         /* Footer */
@@ -352,6 +574,9 @@
             .masthead-title { font-size: 2.5rem; }
             .featured-article h2 { font-size: 2rem; }
             .articles-grid { grid-template-columns: 1fr; }
+            .article { padding: 2rem 1.5rem; }
+            .article::before { font-size: 3rem; right: 1rem; }
+            .section-intro { font-size: 0.95rem; padding: 0 1rem; }
             nav { gap: 1.5rem; }
             .nav-links { gap: 1.5rem; }
         }
@@ -362,7 +587,8 @@
     <div class="masthead">
         <div class="container">
             <p class="masthead-date" id="current-date"></p>
-            <h1 class="masthead-title">Terminal Dispatch</h1>
+            <h1 class="masthead-title"><a href="/dispatch/">Terminal Dispatch</a></h1>
+            <p class="masthead-subtitle">Ancient Faith. Modern Systems.</p>
         </div>
     </div>
 
@@ -370,10 +596,10 @@
         <div class="container">
             <nav>
                 <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/#projects">Projects</a></li>
-                    <li><a href="/blog.html">Articles</a></li>
-                    <li><a href="/#contact">Contact</a></li>
+                    <li><a href="/">← Portfolio</a></li>
+                    <li><a href="/dispatch/">Latest</a></li>
+                    <li><a href="/dispatch/archive.html">Archive</a></li>
+                    <li><a href="/dispatch/contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -392,12 +618,19 @@
             <span class="section-title">More Articles</span>
         </div>
 
+        <p class="section-intro">Explore essays on theology, technology, ethics, and the spaces where they intersect.</p>
+
         <div class="category-tabs" id="category-tabs"></div>
         
         <div id="articles-grid" class="articles-grid"></div>
 
         <div class="read-more-link">
-            <a href="/more-articles.html">View All Articles</a>
+            <a href="/dispatch/archive.html">
+                <span>View All Articles</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
         </div>
     </main>
 
@@ -405,56 +638,20 @@
         <div class="container">
             <p class="footer-logo">Terminal Dispatch</p>
             <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/#projects">Projects</a>
-                <a href="/blog.html">Articles</a>
-                <a href="/#contact">Contact</a>
+                <a href="/">Portfolio</a>
+                <a href="/dispatch/">Latest</a>
+                <a href="/dispatch/archive.html">Archive</a>
             </div>
-            <p class="footer-copyright">&copy; 2026 Evan Wologodzew. All rights reserved.</p>
+            <p class="footer-copyright">&copy; 2026 Evan Wologodzew</p>
         </div>
     </footer>
 
+    <script src="/blogData.js"></script>
     <script>
         // Set current date in masthead
         const dateEl = document.getElementById('current-date');
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         dateEl.textContent = new Date().toLocaleDateString('en-US', options);
-
-        const blogPosts = [
-            {
-                title: "Lineage: Encoding Feudal Metaphysics",
-                date: "January 14, 2026",
-                category: "Systems Design",
-                author: "Evan Wologodzew",
-                excerpt: "How do you model a world where legitimacy flows through bloodlines, power lives in personal oaths, and identity manifests in heraldic symbols? Building feudal ontology as system architecture.",
-                url: "articles/2026-01-14-lineage-encoding-feudal-metaphysics.html",
-                tags: ["Systems Design", "Design", "Productivity", "Engineering", "Game Design", "Systems Thinking", "Medieval History", "Software Architecture"]
-            },
-            {
-                title: "Reflecting on Minimalist Software Design",
-                date: "October 12, 2025",
-                category: "Design",
-                author: "Evan Wologodzew",
-                excerpt: "In a world of feature bloat and complexity, minimalist design stands out. The principle of doing one thing well applies to software as much as it does to physical products.",
-                url: "articles/2025-10-12-reflecting-on-minimalist-software-design.html"
-            },
-            {
-                title: "Why I Switched to a Tiling Window Manager",
-                date: "September 8, 2025",
-                category: "Productivity",
-                author: "Evan Wologodzew",
-                excerpt: "After years of using traditional desktop environments with floating windows, I made the switch to a tiling window manager. It's been one of the best productivity improvements I've made.",
-                url: "articles/2025-09-08-why-i-switched-to-a-tiling-window-manager.html"
-            },
-            {
-                title: "Understanding Async/Await Patterns",
-                date: "August 15, 2025",
-                category: "Engineering",
-                author: "Evan Wologodzew",
-                excerpt: "Async/await has become the standard way to handle asynchronous code in modern programming. Whether you're using JavaScript, Python, or Rust, understanding these patterns is essential.",
-                url: "articles/2025-08-15-understanding-async-await-patterns.html"
-            }
-        ];
 
         function renderBlogPosts() {
             const featuredContainer = document.getElementById('featured-post');
@@ -470,10 +667,17 @@
             const categories = [...new Set(blogPosts.map(post => post.category))];
             let selectedCategory = 'All';
 
-            // Render category tabs
-            const allTab = `<button class="category-tab active" data-category="All">All</button>`;
+            // Count posts per category
+            const categoryCounts = {};
+            categories.forEach(cat => {
+                categoryCounts[cat] = blogPosts.slice(1).filter(p => p.category === cat).length;
+            });
+            const totalCount = blogPosts.length - 1;
+
+            // Render category tabs with counts
+            const allTab = `<button class="category-tab active" data-category="All">All<span class="articles-count">${totalCount}</span></button>`;
             const categoryTabs = categories.map(cat => 
-                `<button class="category-tab" data-category="${cat}">${cat}</button>`
+                `<button class="category-tab" data-category="${cat}">${cat}<span class="articles-count">${categoryCounts[cat]}</span></button>`
             ).join('');
             
             tabsContainer.innerHTML = allTab + categoryTabs;
@@ -491,18 +695,39 @@
                 </article>
             `;
 
+            // Function to estimate reading time
+            function getReadingTime(excerpt) {
+                // Rough estimate based on excerpt length (assume full article is 5x excerpt)
+                const words = excerpt.split(/\s+/).length * 5;
+                const minutes = Math.max(3, Math.ceil(words / 200));
+                return `${minutes} min read`;
+            }
+
             // Function to render grid articles
-            function renderGrid(category) {
+            function renderGrid(category, animate = false) {
                 const filtered = category === 'All' 
-                    ? blogPosts.slice(1)
-                    : blogPosts.slice(1).filter(post => post.category === category);
+                    ? blogPosts.slice(1, 7)  // Show up to 6 articles
+                    : blogPosts.slice(1).filter(post => post.category === category).slice(0, 6);
                 
-                gridContainer.innerHTML = filtered.map(post => `
-                    <article class="article">
-                        <span class="category">${post.category}</span>
+                if (filtered.length === 0) {
+                    gridContainer.innerHTML = `
+                        <div class="empty-state">
+                            <p>No articles in this category yet.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                gridContainer.innerHTML = filtered.map((post, index) => `
+                    <article class="article${animate ? ' animate-in' : ''}" data-index="0${index + 1}" style="${animate ? `animation-delay: ${0.05 * index}s` : ''}">
+                        <div class="article-meta">
+                            <span class="category">${post.category}</span>
+                            <span class="reading-time">${getReadingTime(post.excerpt)}</span>
+                        </div>
                         <h3><a href="${post.url}">${post.title}</a></h3>
                         <p class="byline">${post.date}</p>
                         <p class="excerpt">${post.excerpt}</p>
+                        <a href="${post.url}" class="read-arrow">Read Article</a>
                     </article>
                 `).join('');
             }
@@ -513,13 +738,16 @@
             // Tab click handlers
             tabsContainer.querySelectorAll('.category-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
+                    // Don't re-render if already active
+                    if (this.classList.contains('active')) return;
+                    
                     // Update active state
                     tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Render filtered articles
+                    // Render filtered articles with animation
                     selectedCategory = this.dataset.category;
-                    renderGrid(selectedCategory);
+                    renderGrid(selectedCategory, true);
                 });
             });
         }

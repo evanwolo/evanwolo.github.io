@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Articles – Terminal Dispatch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fbfbf9;
+            --card-bg: #ffffff;
+            --text-primary: #121212;
+            --text-secondary: #5a5a5a;
+            --accent-color: #c41e3a;
+            --border-color: #121212;
+            --border-light: #e0e0e0;
+            --font-headline: 'Playfair Display', Georgia, serif;
+            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0d0d0d;
+                --card-bg: #1a1a1a;
+                --text-primary: #f5f5f5;
+                --text-secondary: #a0a0a0;
+                --border-color: #f5f5f5;
+                --border-light: #333;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        a:hover { color: var(--accent-color); }
+        ul { list-style: none; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; width: 100%; }
+
+        /* Main */
+        main {
+            flex: 1;
+        }
+
+        /* Masthead */
+        .masthead {
+            text-align: center;
+            padding: 1.5rem 0 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .masthead-date {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .masthead-title {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .masthead-title a {
+            color: inherit;
+        }
+
+        .masthead-subtitle {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation */
+        header {
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Search Bar */
+        .search-section {
+            max-width: 700px;
+            margin: 3rem auto 2.5rem;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.25rem 1.75rem;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            border: 1px solid var(--border-light);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-tab {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border-light);
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-body);
+        }
+
+        .category-tab:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .category-tab.active {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #ffffff;
+        }
+
+        /* Tag Pills */
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tag-pill:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #ffffff;
+        }
+
+        /* Filter Status */
+        .filter-status {
+            text-align: center;
+            margin: 2rem 0 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .clear-filters {
+            color: var(--accent-color);
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        .clear-filters:hover {
+            color: var(--text-primary);
+        }
+
+        /* Page Hero */
+        .archive-hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .archive-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .archive-hero h1 {
+            font-family: var(--font-headline);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .archive-hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .article-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-light);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .article-count .count-number {
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        /* Articles Feed - Timeline Style */
+        .articles-feed {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+
+        .articles-feed::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-color), var(--border-light), transparent);
+        }
+
+        .article-card {
+            border-bottom: 1px solid var(--border-light);
+            padding: 2.5rem 0 2.5rem 0;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            background: transparent;
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            left: -46px;
+            top: 3rem;
+            width: 14px;
+            height: 14px;
+            background: var(--bg-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover::before {
+            background: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.2);
+        }
+
+        .article-card:hover {
+            transform: translateX(8px);
+        }
+
+        .article-card:last-child {
+            border-bottom: none;
+        }
+
+        .article-card .article-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .article-card .category {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 0.25rem 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .article-card:hover .category {
+            background: var(--accent-color);
+            color: #ffffff;
+        }
+
+        .article-card .reading-time {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .article-card .reading-time::before {
+            content: '◷';
+            font-size: 0.85rem;
+        }
+
+        .article-card .article-number {
+            font-family: var(--font-headline);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .article-card h2 {
+            font-family: var(--font-headline);
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+            transition: color 0.2s;
+        }
+
+        .article-card h2 a {
+            background: linear-gradient(to right, var(--accent-color), var(--accent-color));
+            background-size: 0% 2px;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.3s ease, color 0.2s;
+        }
+
+        .article-card h2 a:hover {
+            color: var(--accent-color);
+            background-size: 100% 2px;
+        }
+
+        .article-card .byline {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .article-card .byline .author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .article-card .excerpt {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            position: relative;
+            padding-left: 1rem;
+            border-left: 2px solid var(--border-light);
+            transition: border-color 0.3s;
+        }
+
+        .article-card:hover .excerpt {
+            border-left-color: var(--accent-color);
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--accent-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .read-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-color);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .read-more:hover {
+            color: #ffffff;
+        }
+
+        .read-more:hover::before {
+            left: 0;
+        }
+
+        .read-more .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* Staggered Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .article-card {
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .article-card:nth-child(1) { animation-delay: 0.1s; }
+        .article-card:nth-child(2) { animation-delay: 0.2s; }
+        .article-card:nth-child(3) { animation-delay: 0.3s; }
+        .article-card:nth-child(4) { animation-delay: 0.4s; }
+        .article-card:nth-child(5) { animation-delay: 0.5s; }
+        .article-card:nth-child(6) { animation-delay: 0.6s; }
+        .article-card:nth-child(7) { animation-delay: 0.7s; }
+        .article-card:nth-child(8) { animation-delay: 0.8s; }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 3px double var(--border-color);
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .masthead-title { font-size: 2.5rem; }
+            .page-title { font-size: 2rem; }
+            .archive-hero h1 { font-size: 2.25rem; }
+            .article-card h2 { font-size: 1.5rem; }
+            nav { gap: 1.5rem; }
+            .nav-links { gap: 1.5rem; }
+            
+            .articles-feed::before {
+                left: 0;
+            }
+            
+            .article-card::before {
+                left: -6px;
+                width: 10px;
+                height: 10px;
+            }
+            
+            .article-card {
+                padding-left: 1.5rem;
+            }
+            
+            .article-card:hover {
+                transform: translateX(4px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="masthead">
+        <div class="container">
+            <p class="masthead-date" id="current-date"></p>
+            <h1 class="masthead-title"><a href="/dispatch/">Terminal Dispatch</a></h1>
+            <p class="masthead-subtitle">Ancient Faith. Modern Systems.</p>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">← Portfolio</a></li>
+                    <li><a href="/dispatch/">Latest</a></li>
+                    <li><a href="/dispatch/archive.html">Archive</a></li>
+                    <li><a href="/dispatch/contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="archive-hero">
+        <div class="container">
+            <h1>The Archive</h1>
+            <p class="subtitle">A complete collection of essays, analyses, and explorations at the intersection of faith, philosophy, and systems thinking.</p>
+            <div class="article-count">
+                <span class="count-number" id="total-count">0</span>
+                <span>articles published</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-section">
+        <div class="container">
+            <div class="search-wrapper">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="search-input"
+                    placeholder="Search articles by title, content, or tags..."
+                    autocomplete="off"
+                >
+            </div>
+        </div>
+    </div>
+
+    <div class="category-tabs-wrapper">
+        <div class="container">
+            <div class="category-tabs" id="category-tabs"></div>
+        </div>
+    </div>
+
+    <div id="filter-status" class="filter-status"></div>
+
+    <main class="container">
+        <div id="articles-container" class="articles-feed"></div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-logo">Terminal Dispatch</p>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/#projects">Projects</a>
+                <a href="/dispatch/">Articles</a>
+                <a href="/#contact">Contact</a>
+            </div>
+            <p class="footer-copyright">&copy; 2026 Evan Wologodzew. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/blogData.js"></script>
+    <script>
+        // Set current date in masthead
+        const dateEl = document.getElementById('current-date');
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.textContent = new Date().toLocaleDateString('en-US', options);
+
+        let currentFilters = {
+            category: 'All',
+            search: '',
+            tag: null
+        };
+
+        function renderAllArticles() {
+            const container = document.getElementById('articles-container');
+            const tabsContainer = document.getElementById('category-tabs');
+            const searchInput = document.getElementById('search-input');
+            const filterStatus = document.getElementById('filter-status');
+            
+            if (!container || !tabsContainer) {
+                console.error('Article containers not found');
+                return;
+            }
+
+            // Update total count
+            document.getElementById('total-count').textContent = blogPosts.length;
+
+            // Get unique categories
+            const categories = [...new Set(blogPosts.map(post => post.category))];
+
+            // Render category tabs
+            const allTab = `<button class="category-tab active" data-category="All">All</button>`;
+            const categoryTabs = categories.map(cat => 
+                `<button class="category-tab" data-category="${cat}">${cat}</button>`
+            ).join('');
+            
+            tabsContainer.innerHTML = allTab + categoryTabs;
+
+            // Function to filter and render articles
+            function renderArticles() {
+                let filtered = blogPosts;
+
+                // Apply category filter
+                if (currentFilters.category !== 'All') {
+                    filtered = filtered.filter(post => post.category === currentFilters.category);
+                }
+
+                // Apply search filter
+                if (currentFilters.search) {
+                    const searchLower = currentFilters.search.toLowerCase();
+                    filtered = filtered.filter(post => 
+                        post.title.toLowerCase().includes(searchLower) ||
+                        post.excerpt.toLowerCase().includes(searchLower) ||
+                        (post.tags && post.tags.some(tag => tag.toLowerCase().includes(searchLower)))
+                    );
+                }
+
+                // Apply tag filter
+                if (currentFilters.tag) {
+                    filtered = filtered.filter(post => 
+                        post.tags && post.tags.includes(currentFilters.tag)
+                    );
+                }
+
+                // Update filter status
+                updateFilterStatus(filtered.length);
+                
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <p>No articles found matching your filters.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Calculate reading time (rough estimate based on excerpt length)
+                function getReadingTime(excerpt) {
+                    const wordsPerMinute = 200;
+                    const wordCount = excerpt.split(/\s+/).length * 8; // Estimate full article from excerpt
+                    return Math.max(3, Math.ceil(wordCount / wordsPerMinute));
+                }
+
+                container.innerHTML = filtered.map((post, index) => `
+                    <article class="article-card">
+                        <div class="article-header">
+                            <span class="article-number">#${String(filtered.length - index).padStart(2, '0')}</span>
+                            <span class="category">${post.category}</span>
+                            <span class="reading-time">${getReadingTime(post.excerpt)} min read</span>
+                        </div>
+                        <h2><a href="${post.url}">${post.title}</a></h2>
+                        <p class="byline">By <span class="author">${post.author}</span> · ${post.date}</p>
+                        <p class="excerpt">${post.excerpt}</p>
+                        ${post.tags ? `
+                            <div class="article-tags">
+                                ${post.tags.map(tag => `
+                                    <span class="tag-pill" data-tag="${tag}">${tag}</span>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        <a href="${post.url}" class="read-more">Read Article <span class="arrow">→</span></a>
+                    </article>
+                `).join('');
+
+                // Add tag click handlers
+                container.querySelectorAll('.tag-pill').forEach(tag => {
+                    tag.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        currentFilters.tag = this.dataset.tag;
+                        renderArticles();
+                    });
+                });
+            }
+
+            function updateFilterStatus(count) {
+                const hasFilters = currentFilters.category !== 'All' || 
+                                   currentFilters.search !== '' || 
+                                   currentFilters.tag !== null;
+
+                if (!hasFilters) {
+                    filterStatus.innerHTML = '';
+                    return;
+                }
+
+                const filterDesc = [];
+                if (currentFilters.category !== 'All') {
+                    filterDesc.push(`Category: ${currentFilters.category}`);
+                }
+                if (currentFilters.search) {
+                    filterDesc.push(`Search: "${currentFilters.search}"`);
+                }
+                if (currentFilters.tag) {
+                    filterDesc.push(`Tag: ${currentFilters.tag}`);
+                }
+
+                filterStatus.innerHTML = `
+                    Showing ${count} article${count !== 1 ? 's' : ''} · ${filterDesc.join(' · ')}
+                    <span class="clear-filters" onclick="clearAllFilters()">Clear all filters</span>
+                `;
+            }
+
+            // Initial render
+            renderArticles();
+
+            // Category tab click handlers
+            tabsContainer.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Update active state
+                    tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update filter and re-render
+                    currentFilters.category = this.dataset.category;
+                    renderArticles();
+                });
+            });
+
+            // Search input handler
+            searchInput.addEventListener('input', function() {
+                currentFilters.search = this.value.trim();
+                renderArticles();
+            });
+        }
+
+        // Global function to clear all filters
+        function clearAllFilters() {
+            currentFilters = {
+                category: 'All',
+                search: '',
+                tag: null
+            };
+            
+            // Clear search input
+            document.getElementById('search-input').value = '';
+            
+            // Reset category tabs
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.category === 'All') {
+                    tab.classList.add('active');
+                }
+            });
+            
+            renderAllArticles();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderAllArticles);
+        } else {
+            renderAllArticles();
+        }
+    </script>
+</body>
+</html>
