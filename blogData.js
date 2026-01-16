@@ -1,11 +1,11 @@
 // Shared blog post data
 const blogPosts = [
     {
-        title: "When the Knapsack Doesn't Fit: A Russian Orthodox Response to Racial Essentialism",
+        title: "The Kingdom the State Cannot See",
         date: "January 15, 2026",
         category: "Critical Analysis",
         author: "Evan Wologodzew",
-        excerpt: "What happens when the framework of privilege can't account for the persecution of supposedly privileged groups? A theological and historical critique of contemporary social theory.",
+        excerpt: "When frameworks designed to detect power encounter sacramental communion, they mistake their own blindness for hidden operations.",
         url: "/articles/2026-01-15-when-the-knapsack-doesnt-fit.html",
         tags: ["Critical Analysis", "Theology", "Orthodox Christianity", "Social Theory", "Philosophy", "Political Thought", "Religious Freedom"],
         series: null, // Can be set to group articles into series
