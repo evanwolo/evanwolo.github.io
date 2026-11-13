@@ -35,6 +35,9 @@ function renderProject(project, index) {
   if (project.context) body.append(element('p', 'project-context', project.context));
   body.append(element('p', '', project.description));
   if (project.methods) body.append(element('p', 'project-context', project.methods));
+  if (project.overview) {
+    for (const paragraph of project.overview) body.append(element('p', 'project-overview', paragraph));
+  }
   if (project.metrics) {
     const metrics = element('dl', 'project-metrics');
     for (const metric of project.metrics) {

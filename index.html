@@ -70,7 +70,7 @@
       }
       summary::-webkit-details-marker { display: none; }
       .number, .category, .indicator { color: #777; font-size: 12px; }
-      .technologies { display: flex; align-items: center; gap: 10px; color: #666; }
+      .technologies { display: flex; flex-wrap: wrap; justify-content: flex-end; max-width: 164px; align-items: center; gap: 10px; color: #666; }
       .technologies img { display: block; width: 19px; height: 19px; flex: 0 0 auto; }
       .number { font-variant-numeric: tabular-nums; }
       .project-title { font-size: 16px; font-weight: 500; }
@@ -80,6 +80,7 @@
       summary:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
       .project-body { padding: 0 0 26px 40px; }
       .project-body p { color: #555; }
+      .project-body .project-overview { margin-top: 18px; font-size: 14px; }
       .project-full-title { margin: 0 0 8px; font-size: 17px; font-weight: 500; }
       .project-body .project-context { margin: 12px 0; color: #666; font-size: 12px; }
       .project-metrics { display: flex; flex-wrap: wrap; gap: 16px 24px; margin: 24px 0 12px; }
@@ -150,7 +151,7 @@
         body { padding-top: 40px; }
         .project summary { gap: 8px; grid-template-columns: 22px minmax(0, 1fr) auto 12px; }
         .project-body { padding-left: 30px; }
-        .technologies { gap: 6px; }
+        .technologies { gap: 6px; max-width: 60px; }
         .technologies img { width: 16px; height: 16px; }
         .project-title { font-size: 15px; }
       }

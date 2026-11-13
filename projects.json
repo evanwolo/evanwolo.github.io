@@ -35,12 +35,20 @@
     {
         "id":  "parish-scraper",
         "repository":  "https://github.com/evanwolo/parish-scraper",
-        "name":  "Parish Scraper",
-        "description":  "Collects Orthodox parish directories into a searchable dataset, with a web interface for exploring the results.",
+        "name":  "Orthodox Parish Data Warehouse \u0026 Spatial Analytics Platform",
+        "description":  "An end-to-end spatial data warehouse and interactive mapping platform tracking Eastern Orthodox parishes, monasteries, and episcopal sees across North America and Europe. Orchestrated with Apache Airflow, the pipeline ingests data from 20 jurisdiction scrapers, resolves duplicates via spherical distance and fuzzy string matching, and populates a MySQL 8.0 Star Schema to serve real-time GeoJSON viewport queries and Voronoi parish territories to a decoupled web client.",
         "technologies":  [
                              {
-                                 "icon":  "assets/javascript.svg",
-                                 "name":  "JavaScript"
+                                 "icon":  "assets/airflow.svg",
+                                 "name":  "Apache Airflow"
+                             },
+                             {
+                                 "icon":  "assets/python.svg",
+                                 "name":  "Python"
+                             },
+                             {
+                                 "icon":  "assets/mysql.svg",
+                                 "name":  "MySQL 8.0"
                              },
                              {
                                  "icon":  "assets/nodejs.svg",
@@ -51,8 +59,8 @@
                                  "name":  "Express"
                              },
                              {
-                                 "icon":  "assets/sqlite.svg",
-                                 "name":  "SQLite"
+                                 "icon":  "assets/vite.svg",
+                                 "name":  "Vite"
                              }
                          ],
         "visual":  {
@@ -61,9 +69,16 @@
                        "src":  "assets/parish-scraper.svg"
                    },
         "highlights":  [
-                           "Normalizes records, merges duplicates, and adds geographic coordinates.",
-                           "Exports CSV, JSON, and static snapshots for the frontend."
-                       ]
+                           "ETL Orchestration: Apache Airflow Dynamic Task Mapping extracts, sanitizes, and incrementally geocodes records across 20 North American and European scrapers.",
+                           "Dimensional Modeling: MySQL 8.0 Star Schema with fact_parish_snapshot, six dimensions, SRID 4326 spatial indexes, and WITH ROLLUP aggregations across canonical hierarchies.",
+                           "Entity Resolution: Spherical distance (ST_Distance_Sphere), fuzzy token matching, and source-trust weighting reconcile overlapping diocesan and aggregator directories.",
+                           "Service Decoupling: A stateless Node.js GeoJSON API replaces static JSON snapshots, serving MBRContains viewport queries and Voronoi territory polygons to a standalone frontend."
+                       ],
+        "methods":  "Apache Airflow / Python / MySQL 8.0 (Spatial \u0026 Star Schema) / Node.js / Express / GeoJSON / Vite",
+        "overview":  [
+                         "Directory data for Eastern Orthodox parishes is fragmented across independent patriarchal, archdiocesan, and aggregator websites with inconsistent formatting and overlapping listings. The platform separates ingestion, analytical storage, and presentation into three independent tiers.",
+                         "An Apache Airflow DAG uses Dynamic Task Mapping to run 20 jurisdiction-specific extractors in parallel, landing raw records into MySQL staging. Transformations standardize clerical titles and addresses, incrementally geocode hashed location keys, and deduplicate entities using source-trust weighting, ST_Distance_Sphere proximity, and token similarity. Validated records load into a Kimball Star Schema with fact_parish_snapshot and six dimensions, SRID 4326 spatial indexes, precomputed Voronoi catchment polygons, and WITH ROLLUP OLAP views. A stateless Node.js REST API uses MBRContains bounding-box filters to deliver lightweight GeoJSON to a standalone SPA."
+                     ]
     },
     {
         "id":  "keeper-league",

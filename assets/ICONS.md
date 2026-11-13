@@ -14,3 +14,6 @@ See https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md.
 - express.svg : https://cdn.jsdelivr.net/npm/simple-icons@16.37.0/icons/express.svg
 - sqlite.svg : https://cdn.jsdelivr.net/npm/simple-icons@16.37.0/icons/sqlite.svg
 - github-actions.svg : https://cdn.jsdelivr.net/npm/simple-icons@16.37.0/icons/githubactions.svg
+- vite.svg : https://cdn.jsdelivr.net/npm/simple-icons@16.37.0/icons/vite.svg
+- mysql.svg : https://cdn.jsdelivr.net/npm/simple-icons@16.37.0/icons/mysql.svg
+- airflow.svg : https://cdn.jsdelivr.net/npm/simple-icons@16.37.0/icons/apacheairflow.svg
