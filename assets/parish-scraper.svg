@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 120" role="img" aria-label="Diagram of directory records merging into one dataset">
+                <g fill="none" stroke="#d6d6d6"><path d="M0 30H440M0 60H440M0 90H440M55 0V120M110 0V120M165 0V120M220 0V120M275 0V120M330 0V120M385 0V120" stroke-dasharray="2 5"/><path d="M62 30L220 60M110 90L220 60M165 20L220 60M220 60L315 30M220 60L375 85" stroke="#888" stroke-dasharray="3 4"/></g>
+                <g fill="#fff" stroke="#555"><circle cx="62" cy="30" r="5"/><circle cx="110" cy="90" r="5"/><circle cx="165" cy="20" r="5"/><circle cx="315" cy="30" r="5"/><circle cx="375" cy="85" r="5"/></g><circle cx="220" cy="60" r="9" fill="#222"/>
+              </svg>

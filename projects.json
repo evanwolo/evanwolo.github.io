@@ -1,0 +1,101 @@
+[
+    {
+        "id":  "ecthr-vote-reconstruction",
+        "name":  "Patterns of Judgment",
+        "title":  "Predicting Partially Masked Judicial Votes",
+        "context":  "European Court of Human Rights / Data Science Capstone (ISTE 470) / Rochester Institute of Technology",
+        "repository":  null,
+        "description":  "What can a group reveal about an unseen decision? A study of 10,000 judicial ballots, using procedural rules and voting coalitions to reconstruct masked votes and explore how patterns travel across borders.",
+        "technologies":  [
+                             {
+                                 "icon":  "assets/python.svg",
+                                 "name":  "Python"
+                             },
+                             {
+                                 "icon":  "assets/scikit-learn.svg",
+                                 "name":  "scikit-learn"
+                             },
+                             {
+                                 "icon":  "assets/pandas.svg",
+                                 "name":  "pandas"
+                             },
+                             {
+                                 "icon":  "assets/numpy.svg",
+                                 "name":  "NumPy"
+                             }
+                         ],
+        "methods":  "Empirical Bayes / TF-IDF / Gradient boosting",
+        "highlights":  [
+                           "Models each panel as a connected whole, reconstructing individual votes from a shared outcome and patterns of dissent.",
+                           "Examines how judicial tendencies, national allegiance, and procedural language shape collective decisions.",
+                           "Explores generalization to unseen respondent countries through country-held-out evaluation, with a Python pipeline and IEEE research paper."
+                       ],
+        "visual":  {
+                       "caption":  "Individual signals. A collective pattern.",
+                       "alt":  "Abstract diagram of visible and hidden votes orbiting a shared center",
+                       "src":  "assets/ecthr-vote-reconstruction.svg"
+                   }
+    },
+    {
+        "id":  "parish-scraper",
+        "repository":  "https://github.com/evanwolo/parish-scraper",
+        "name":  "Parish Scraper",
+        "description":  "Collects Orthodox parish directories into a searchable dataset, with a web interface for exploring the results.",
+        "technologies":  [
+                             {
+                                 "icon":  "assets/javascript.svg",
+                                 "name":  "JavaScript"
+                             },
+                             {
+                                 "icon":  "assets/nodejs.svg",
+                                 "name":  "Node.js"
+                             },
+                             {
+                                 "icon":  "assets/express.svg",
+                                 "name":  "Express"
+                             },
+                             {
+                                 "icon":  "assets/sqlite.svg",
+                                 "name":  "SQLite"
+                             }
+                         ],
+        "visual":  {
+                       "caption":  "Multiple directories. One connected dataset.",
+                       "alt":  "Diagram of directory records merging into one dataset",
+                       "src":  "assets/parish-scraper.svg"
+                   },
+        "highlights":  [
+                           "Normalizes records, merges duplicates, and adds geographic coordinates.",
+                           "Exports CSV, JSON, and static snapshots for the frontend."
+                       ]
+    },
+    {
+        "id":  "keeper-league",
+        "repository":  "https://github.com/evanwolo/keeper-league",
+        "name":  "Keeper League",
+        "description":  "A fantasy baseball dashboard for comparing rosters, player projections, and team power rankings.",
+        "technologies":  [
+                             {
+                                 "icon":  "assets/javascript.svg",
+                                 "name":  "JavaScript"
+                             },
+                             {
+                                 "icon":  "assets/nodejs.svg",
+                                 "name":  "Node.js"
+                             },
+                             {
+                                 "icon":  "assets/github-actions.svg",
+                                 "name":  "GitHub Actions"
+                             }
+                         ],
+        "visual":  {
+                       "caption":  "Roster strength, at a glance. Illustrative rankings.",
+                       "alt":  "Illustrative team rankings chart, not actual league data",
+                       "src":  "assets/keeper-league.svg"
+                   },
+        "highlights":  [
+                           "Combines roster and statistics data from Fantrax and FanGraphs.",
+                           "Compares six projection systems and blends in season performance."
+                       ]
+    }
+]

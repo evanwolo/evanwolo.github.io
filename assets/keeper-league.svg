@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 120" role="img" aria-label="Illustrative team rankings chart, not actual league data">
+                <g stroke="#e5e5e5" stroke-dasharray="2 5"><path d="M110 10V110M220 10V110M330 10V110M439 10V110"/></g>
+                <g fill="#777" font-family="system-ui, sans-serif" font-size="10"><text x="0" y="25">01</text><text x="0" y="55">02</text><text x="0" y="85">03</text></g>
+                <rect x="30" y="15" width="355" height="12" fill="#333"/><rect x="30" y="45" width="280" height="12" fill="#888"/><rect x="30" y="75" width="205" height="12" fill="#ccc"/>
+              </svg>
