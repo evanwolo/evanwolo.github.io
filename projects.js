@@ -24,9 +24,22 @@ function renderProject(project, index) {
   }
   const indicator = element('span', 'indicator', '+');
   indicator.setAttribute('aria-hidden', 'true');
+  const heading = element('span', 'project-heading');
+  heading.append(element('span', 'project-title', project.name));
+  if (project.tags?.length) {
+    const tags = element('span', 'project-tags');
+    tags.setAttribute('role', 'list');
+    tags.setAttribute('aria-label', 'Project tags');
+    for (const tag of project.tags) {
+      const label = element('span', 'project-tag', tag);
+      label.setAttribute('role', 'listitem');
+      tags.append(label);
+    }
+    heading.append(tags);
+  }
   summary.append(
     element('span', 'number', String(index + 1).padStart(2, '0')),
-    element('span', 'project-title', project.name),
+    heading,
     technologies,
     indicator
   );

@@ -74,6 +74,18 @@
       .technologies img { display: block; width: 19px; height: 19px; flex: 0 0 auto; }
       .number { font-variant-numeric: tabular-nums; }
       .project-title { font-size: 16px; font-weight: 500; }
+      .project-heading { min-width: 0; }
+      .project-title { display: block; }
+      .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+      .project-tag {
+        padding: 2px 7px;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        color: #666;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
       .indicator { text-align: right; transition: transform 180ms ease; }
       .project[open] .indicator { transform: rotate(45deg); }
       summary:hover .project-title { text-decoration: underline; text-underline-offset: 4px; }
@@ -159,7 +171,7 @@
   </head>
   <body>
     <main>
-      <h1>evanwolo</h1>
+      <h1>Evan Wologodzew</h1>
       <p class="intro">A few things I&rsquo;ve built.</p>
 
       <section aria-labelledby="projects-heading">

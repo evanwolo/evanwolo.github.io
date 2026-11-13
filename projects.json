@@ -30,7 +30,12 @@
                            "Cross-Border Judge \u0026 Coalition Features: Estimated leak-free Empirical Bayes judge ideology priors across 7,517 disjoint unmasked merits ballots (N_overlap = 0), quantified national-judge bias shifts (+37.91% pro-government shift on home-country merits cases versus -24.64% on procedural dismissals), and combined 28 structural/clause-parsing features with 450 TF-IDF n-grams in an equally weighted three-model ensemble.",
                            "Validation, Diagnostics \u0026 Deliverables: Enforced strict Leave-One-Country-Out (LOGO) validation to raise cold-start accuracy on unseen countries from 57.04% to 69.03% (p = 0.0007), diagnosed a Bayesian shrinkage covariate shift on three Grand Chamber panels, and achieved a 0.96266 holdout leaderboard score (83.16% on masked test ballots) alongside a reproducible Python pipeline and IEEE research paper."
                        ],
-        "resultsNote":  "Results and validation claims are reported from the project summary."
+        "resultsNote":  "Results and validation claims are reported from the project summary.",
+        "tags":  [
+                     "Machine Learning",
+                     "Legal Analytics",
+                     "NLP"
+                 ]
     },
     {
         "id":  "parish-scraper",
@@ -78,7 +83,12 @@
         "overview":  [
                          "Directory data for Eastern Orthodox parishes is fragmented across independent patriarchal, archdiocesan, and aggregator websites with inconsistent formatting and overlapping listings. The platform separates ingestion, analytical storage, and presentation into three independent tiers.",
                          "An Apache Airflow DAG uses Dynamic Task Mapping to run 20 jurisdiction-specific extractors in parallel, landing raw records into MySQL staging. Transformations standardize clerical titles and addresses, incrementally geocode hashed location keys, and deduplicate entities using source-trust weighting, ST_Distance_Sphere proximity, and token similarity. Validated records load into a Kimball Star Schema with fact_parish_snapshot and six dimensions, SRID 4326 spatial indexes, precomputed Voronoi catchment polygons, and WITH ROLLUP OLAP views. A stateless Node.js REST API uses MBRContains bounding-box filters to deliver lightweight GeoJSON to a standalone SPA."
-                     ]
+                     ],
+        "tags":  [
+                     "Data Engineering",
+                     "Spatial Analytics",
+                     "ETL"
+                 ]
     },
     {
         "id":  "keeper-league",
@@ -107,6 +117,11 @@
         "highlights":  [
                            "Combines roster and statistics data from Fantrax and FanGraphs.",
                            "Compares six projection systems and blends in season performance."
-                       ]
+                       ],
+        "tags":  [
+                     "Fantasy Baseball",
+                     "Projections",
+                     "Dashboard"
+                 ]
     }
 ]
