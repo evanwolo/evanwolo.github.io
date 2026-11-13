@@ -14,3 +14,20 @@ Commit both the JSON and generated `index.html`. Project rows and technical disc
 Use `displayName` and `summary` for the compact index, `name` for the full title, and `problem`, `contribution`, and `outcome` for the case study. Longer supplied descriptions remain under Technical details. Only add repository, report, or demo links when the destination is confirmed.
 
 Technology logo sources are documented in `assets/ICONS.md`.
+
+## Blog
+
+Posts live in `posts.json`, in display order. Add entries using this structure, then run `./build.ps1` and commit the regenerated HTML:
+
+```json
+{
+  "id": "your-post-slug",
+  "title": "Your post title",
+  "date": "2026-11-12",
+  "summary": "A short introduction for the collapsed row.",
+  "tags": ["Data Science"],
+  "paragraphs": ["First paragraph.", "Second paragraph."]
+}
+```
+
+Dates use `YYYY-MM-DD`. Content is plain text and is escaped during generation. Blog posts use the same native expandable rows as projects and remain readable without JavaScript.

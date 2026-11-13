@@ -195,6 +195,10 @@
       .technical-details > div { font-size: 14px; }
       .technical-details p + p { margin-top: 14px; }
       @media print { body { max-width: none; padding: 0; } .project > .project-body { display: block; } .technologies, .indicator { display: none; } }
+      .post-date { grid-area: technologies; padding-top: 4px; color: #666; font-size: 12px; white-space: nowrap; }
+      .post-body p + p { margin-top: 16px; }
+      .blog-empty { margin: 0; padding: 20px 0; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; color: #666; font-size: 14px; }
+      @media (max-width: 600px) { .post-date { padding-top: 0; } }
     </style>
   </head>
   <body>
@@ -265,6 +269,12 @@
       </section>
 
 
+      <section aria-labelledby="blog-heading">
+        <!-- BLOG:START -->
+<h2 id="blog-heading" class="index-heading">Blog <span>00</span></h2>
+<p class="blog-empty">No posts yet.</p>
+<!-- BLOG:END -->
+      </section>
     </main>
 
   </body>

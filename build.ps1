@@ -37,6 +37,25 @@ $path = "$PSScriptRoot/index.html"
 $html = [IO.File]::ReadAllText($path)
 if ($html -notmatch '(?s)<!-- PROJECTS:START -->.*?<!-- PROJECTS:END -->') { throw 'Missing project markers' }
 $html = [regex]::Replace($html, '(?s)<!-- PROJECTS:START -->.*?<!-- PROJECTS:END -->', [System.Text.RegularExpressions.MatchEvaluator]{ param($match) $content })
+$posts = @(ConvertFrom-Json ([IO.File]::ReadAllText("$PSScriptRoot/posts.json")) | ForEach-Object { $_ })
+$postRows = for ($i = 0; $i -lt $posts.Count; $i++) {
+  $post = $posts[$i]
+  if (!$post.id -or !$post.title -or !$post.date -or !$post.paragraphs.Count) { throw 'Posts require id, title, date, and paragraphs' }
+  $date = [datetime]::ParseExact($post.date, 'yyyy-MM-dd', [cultureinfo]::InvariantCulture)
+  $tags = foreach ($tag in $post.tags) { '<span class="project-tag">' + (Escape $tag) + '</span>' }
+  $paragraphs = foreach ($paragraph in $post.paragraphs) { '<p>' + (Escape $paragraph) + '</p>' }
+  @"
+<details class="project blog-post" name="posts" id="post-$(Escape $post.id)">
+  <summary><span class="number">$('{0:D2}' -f ($i + 1))</span><span class="project-heading"><span class="project-title">$(Escape $post.title)</span><span class="project-summary">$(Escape $post.summary)</span><span class="project-tags">$($tags -join '')</span></span><time class="post-date" datetime="$(Escape $post.date)">$($date.ToString('MMM yyyy', [cultureinfo]::InvariantCulture))</time><span class="indicator" aria-hidden="true">+</span></summary>
+  <div class="project-body post-body">$($paragraphs -join "`n")</div>
+</details>
+"@
+}
+$postContent = if ($posts.Count) { $postRows -join "`n" } else { '<p class="blog-empty">No posts yet.</p>' }
+$blog = '<!-- BLOG:START -->' + "`n" + '<h2 id="blog-heading" class="index-heading">Blog <span>' + ('{0:D2}' -f $posts.Count) + '</span></h2>' + "`n" + $postContent + "`n<!-- BLOG:END -->"
+if ($html -notmatch '(?s)<!-- BLOG:START -->.*?<!-- BLOG:END -->') { throw 'Missing blog markers' }
+$html = [regex]::Replace($html, '(?s)<!-- BLOG:START -->.*?<!-- BLOG:END -->', [System.Text.RegularExpressions.MatchEvaluator]{ param($match) $blog })
 $html = [regex]::Replace($html, '[ \t]+(?=\r?$)', '', 'Multiline')
 [IO.File]::WriteAllText($path, $html)
 Write-Output "Rendered $($projects.Count) static project entries."
+Write-Output "Rendered $($posts.Count) static blog entries."
