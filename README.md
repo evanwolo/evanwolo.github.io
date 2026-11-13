@@ -30,4 +30,4 @@ Posts live in `posts.json`, in display order. Add entries using this structure, 
 }
 ```
 
-Dates use `YYYY-MM-DD`. Content is plain text and is escaped during generation. Blog posts use the same native expandable rows as projects and remain readable without JavaScript.
+Dates use `YYYY-MM-DD`. Entries are sorted newest first and displayed in a timeline above projects. Content is plain text and is escaped during generation. Full entries use native disclosures and remain readable without JavaScript.

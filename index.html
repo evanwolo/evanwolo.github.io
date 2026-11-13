@@ -199,6 +199,20 @@
       .post-body p + p { margin-top: 16px; }
       .blog-empty { margin: 0; padding: 20px 0; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; color: #666; font-size: 14px; }
       @media (max-width: 600px) { .post-date { padding-top: 0; } }
+      .news-feed { border-top: 1px solid #e5e5e5; }
+      .feed-entry { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 24px; padding: 24px 0; border-bottom: 1px solid #e5e5e5; }
+      .feed-date { font-family: ui-monospace, monospace; font-size: 11px; color: #666; padding-top: 4px; }
+      .feed-content { position: relative; border-left: 1px solid #ddd; padding-left: 22px; min-width: 0; overflow-wrap: anywhere; }
+      .feed-content::before { content: ''; position: absolute; left: -4px; top: 8px; width: 7px; height: 7px; background: #333; border-radius: 50%; }
+      .feed-content .project-tags { margin: 0 0 8px; }
+      .feed-content h3 { margin: 0 0 6px; font-size: 16px; font-weight: 500; }
+      .feed-summary, .post-body { font-size: 14px; color: #555; }
+      .feed-details summary { padding: 12px 0; min-height: 44px; cursor: pointer; font-size: 12px; list-style: disclosure-closed; }
+      .feed-details[open] summary { list-style: disclosure-open; }
+      .feed-empty { display: flex; align-items: baseline; gap: 16px; padding: 22px 0; border-block: 1px solid #e5e5e5; font-size: 14px; color: #555; }
+      .feed-marker { width: 7px; height: 7px; border: 1px solid #777; border-radius: 50%; flex-shrink: 0; }
+      .feed-empty p span { display: block; margin-top: 4px; font-size: 12px; color: #666; }
+      @media (max-width: 600px) { .feed-entry { grid-template-columns: minmax(0, 1fr); gap: 10px; } .feed-date { padding-left: 22px; } }
     </style>
   </head>
   <body>
@@ -220,61 +234,63 @@
         </nav>
       </section>
 
+      <section aria-labelledby="blog-heading">
+        <!-- BLOG:START -->
+<h2 id="blog-heading" class="index-heading">Blog <span>Latest updates / 00</span></h2>
+<div class="feed-empty"><span class="feed-marker" aria-hidden="true"></span><p>No entries yet.<span>Project notes and updates will appear here.</span></p></div>
+<!-- BLOG:END -->
+      </section>
+
       <section aria-labelledby="projects-heading">
         <!-- PROJECTS:START -->
 <h2 id="projects-heading" class="index-heading">Selected projects <span>03</span></h2>
 <details class="project" name="projects" id="ecthr-vote-reconstruction">
-  <summary><span class="number">01</span><span class="project-heading"><span class="project-title">ECtHR Vote Reconstruction</span><span class="project-summary">Reconstructing hidden judicial votes from panel structure, procedural language, and patterns of dissent.</span><span class="project-tags"><span class="project-tag">Machine Learning</span><span class="project-tag">Legal Analytics</span><span class="project-tag">NLP</span></span></span><span class="technologies"><img width="20" height="20" src="assets/python.svg" alt="Python" title="Python"><img width="20" height="20" src="assets/scikit-learn.svg" alt="scikit-learn" title="scikit-learn"><img width="20" height="20" src="assets/pandas.svg" alt="pandas" title="pandas"><img width="20" height="20" src="assets/numpy.svg" alt="NumPy" title="NumPy"></span><span class="indicator" aria-hidden="true">+</span></summary>
+  <summary><span class="number">01</span><span class="project-heading"><span class="project-title"></span><span class="project-summary"></span><span class="project-tags"></span></span><span class="technologies"><img width="20" height="20" src="assets/python.svg" alt="Python" title="Python"><img width="20" height="20" src="assets/scikit-learn.svg" alt="scikit-learn" title="scikit-learn"><img width="20" height="20" src="assets/pandas.svg" alt="pandas" title="pandas"><img width="20" height="20" src="assets/numpy.svg" alt="NumPy" title="NumPy"></span><span class="indicator" aria-hidden="true">+</span></summary>
   <div class="project-body">
-    <h3 class="project-full-title">Predicting Partially Masked Judicial Votes on European Court of Human Rights Panels</h3>
-    <p class="project-context">Data Science Capstone (ISTE 470) | Rochester Institute of Technology</p>
-    <div class="case-section"><h4>Problem</h4><p>Some procedural ballots conceal their outcomes, and most masked test ballots involve respondent countries absent from training.</p></div>
-<div class="case-section"><h4>My contribution</h4><p>Built a panel-level prediction pipeline combining dissent indicators, empirical Bayes judge priors, procedural features, and a three-model ensemble.</p></div>
-<div class="case-section"><h4>Result</h4><p>Produced a Python reconstruction pipeline and an IEEE capstone report. The supplied summary reports 96.266% holdout accuracy and 69.03% country-held-out accuracy.</p></div>
-    <p class="results-note">The report and validation artifacts are not linked here. Overall holdout accuracy includes observable merits ballots; the reported masked-ballot accuracy is 83.16%. Country-held-out and significance results require supporting experiment artifacts.</p>
-    <p class="project-context"><strong>Technologies &amp; methods</strong><br>Tools: Python, scikit-learn, pandas, NumPy, Empirical Bayes, TF-IDF, Gradient Boosting</p>
-    <details class="technical-details"><summary>Technical details</summary><div><p>This capstone project investigates judicial behavior and cross-border generalization across 10,000 ballots (7,000 training, 3,000 test) cast on multi-judge European Court of Human Rights (ECtHR) panels. While approximately 75% of the dataset consists of substantive merits rulings with directly observable verdicts (y_i = 1 - violation_vote_i), the remaining 25% (1,818 training and 665 test ballots) covers secondary procedural issues, such as admissibility, damages, and docket strikes, where the outcome label is administratively masked and 88.9% of masked test ballots involve 15 unseen respondent countries. Rather than treating judges as interchangeable text processors, the study tests whether procedural rules, voting coalitions, and national allegiance govern judicial decisions.</p><ul><li>Zero-Contradiction Panel Modeling: Collapsed masked ballots into panel-level equilibria (y_i = M_p XOR d_i) across 126 training and 51 test panels, reducing target degrees of freedom by 13x and eliminating intra-panel voting contradictions.</li><li>Cross-Border Judge &amp; Coalition Features: Estimated leak-free Empirical Bayes judge ideology priors across 7,517 disjoint unmasked merits ballots (N_overlap = 0), quantified national-judge bias shifts (+37.91% pro-government shift on home-country merits cases versus -24.64% on procedural dismissals), and combined 28 structural/clause-parsing features with 450 TF-IDF n-grams in an equally weighted three-model ensemble.</li><li>Validation, Diagnostics &amp; Deliverables: Enforced strict Leave-One-Country-Out (LOGO) validation to raise cold-start accuracy on unseen countries from 57.04% to 69.03% (p = 0.0007), diagnosed a Bayesian shrinkage covariate shift on three Grand Chamber panels, and achieved a 0.96266 holdout leaderboard score (83.16% on masked test ballots) alongside a reproducible Python pipeline and IEEE research paper.</li></ul></div></details>
+    <h3 class="project-full-title">Patterns of Judgment</h3>
+    <p class="project-context">European Court of Human Rights / Data Science Capstone (ISTE 470) / Rochester Institute of Technology</p>
+    <div class="case-section"><h4>Problem</h4><p></p></div>
+<div class="case-section"><h4>My contribution</h4><p></p></div>
+<div class="case-section"><h4>Result</h4><p></p></div>
+
+    <p class="project-context"><strong>Technologies &amp; methods</strong><br>Empirical Bayes / TF-IDF / Gradient boosting</p>
+    <details class="technical-details"><summary>Technical details</summary><div><p>What can a group reveal about an unseen decision? A study of 10,000 judicial ballots, using procedural rules and voting coalitions to reconstruct masked votes and explore how patterns travel across borders.</p><ul></ul></div></details>
 
   </div>
 </details>
 <details class="project" name="projects" id="parish-scraper">
-  <summary><span class="number">02</span><span class="project-heading"><span class="project-title">Orthodox Parish Spatial Warehouse</span><span class="project-summary">Unifying fragmented parish directories into a spatial warehouse and an interactive mapping platform.</span><span class="project-tags"><span class="project-tag">Data Engineering</span><span class="project-tag">Spatial Analytics</span><span class="project-tag">ETL</span></span></span><span class="technologies"><img width="20" height="20" src="assets/airflow.svg" alt="Apache Airflow" title="Apache Airflow"><img width="20" height="20" src="assets/python.svg" alt="Python" title="Python"><img width="20" height="20" src="assets/mysql.svg" alt="MySQL 8.0" title="MySQL 8.0"><img width="20" height="20" src="assets/nodejs.svg" alt="Node.js" title="Node.js"><img width="20" height="20" src="assets/express.svg" alt="Express" title="Express"><img width="20" height="20" src="assets/vite.svg" alt="Vite" title="Vite"></span><span class="indicator" aria-hidden="true">+</span></summary>
+  <summary><span class="number">02</span><span class="project-heading"><span class="project-title"></span><span class="project-summary"></span><span class="project-tags"></span></span><span class="technologies"><img width="20" height="20" src="assets/javascript.svg" alt="JavaScript" title="JavaScript"><img width="20" height="20" src="assets/nodejs.svg" alt="Node.js" title="Node.js"><img width="20" height="20" src="assets/express.svg" alt="Express" title="Express"><img width="20" height="20" src="assets/sqlite.svg" alt="SQLite" title="SQLite"></span><span class="indicator" aria-hidden="true">+</span></summary>
   <div class="project-body">
-    <h3 class="project-full-title">Orthodox Parish Data Warehouse &amp; Spatial Analytics Platform</h3>
+    <h3 class="project-full-title">Parish Scraper</h3>
     <p class="project-context"></p>
-    <div class="case-section"><h4>Problem</h4><p>Independent church directories overlap and use inconsistent formats, making geographic and hierarchical analysis difficult.</p></div>
-<div class="case-section"><h4>My contribution</h4><p>Designed an Airflow ingestion pipeline, distance-based entity resolution, a MySQL spatial star schema, and a separate GeoJSON API.</p></div>
-<div class="case-section"><h4>Result</h4><p>Connects jurisdiction records to viewport queries, canonical hierarchy summaries, and Voronoi parish territories.</p></div>
+    <div class="case-section"><h4>Problem</h4><p></p></div>
+<div class="case-section"><h4>My contribution</h4><p></p></div>
+<div class="case-section"><h4>Result</h4><p></p></div>
 
-    <p class="project-context"><strong>Technologies &amp; methods</strong><br>Apache Airflow / Python / MySQL 8.0 (Spatial &amp; Star Schema) / Node.js / Express / GeoJSON / Vite</p>
-    <details class="technical-details"><summary>Technical details</summary><div><p>An end-to-end spatial data warehouse and interactive mapping platform tracking Eastern Orthodox parishes, monasteries, and episcopal sees across North America and Europe. Orchestrated with Apache Airflow, the pipeline ingests data from 20 jurisdiction scrapers, resolves duplicates via spherical distance and fuzzy string matching, and populates a MySQL 8.0 Star Schema to serve real-time GeoJSON viewport queries and Voronoi parish territories to a decoupled web client.</p><p>Directory data for Eastern Orthodox parishes is fragmented across independent patriarchal, archdiocesan, and aggregator websites with inconsistent formatting and overlapping listings. The platform separates ingestion, analytical storage, and presentation into three independent tiers.</p><p>An Apache Airflow DAG uses Dynamic Task Mapping to run 20 jurisdiction-specific extractors in parallel, landing raw records into MySQL staging. Transformations standardize clerical titles and addresses, incrementally geocode hashed location keys, and deduplicate entities using source-trust weighting, ST_Distance_Sphere proximity, and token similarity. Validated records load into a Kimball Star Schema with fact_parish_snapshot and six dimensions, SRID 4326 spatial indexes, precomputed Voronoi catchment polygons, and WITH ROLLUP OLAP views. A stateless Node.js REST API uses MBRContains bounding-box filters to deliver lightweight GeoJSON to a standalone SPA.</p><ul><li>ETL Orchestration: Apache Airflow Dynamic Task Mapping extracts, sanitizes, and incrementally geocodes records across 20 North American and European scrapers.</li><li>Dimensional Modeling: MySQL 8.0 Star Schema with fact_parish_snapshot, six dimensions, SRID 4326 spatial indexes, and WITH ROLLUP aggregations across canonical hierarchies.</li><li>Entity Resolution: Spherical distance (ST_Distance_Sphere), fuzzy token matching, and source-trust weighting reconcile overlapping diocesan and aggregator directories.</li><li>Service Decoupling: A stateless Node.js GeoJSON API replaces static JSON snapshots, serving MBRContains viewport queries and Voronoi territory polygons to a standalone frontend.</li></ul></div></details>
-    <a class="repository-link" href="https://github.com/evanwolo/parish-scraper" aria-label="View Orthodox Parish Spatial Warehouse repository on GitHub">View repository <span aria-hidden="true">&#8599;</span></a>
+    <p class="project-context"><strong>Technologies &amp; methods</strong><br>JavaScript / Node.js / Express / SQLite</p>
+    <details class="technical-details"><summary>Technical details</summary><div><p>Collects Orthodox parish directories into a searchable dataset, with a web interface for exploring the results.</p><ul></ul></div></details>
+    <a class="repository-link" href="https://github.com/evanwolo/parish-scraper" aria-label="View  repository on GitHub">View repository <span aria-hidden="true">&#8599;</span></a>
   </div>
 </details>
 <details class="project" name="projects" id="keeper-league">
-  <summary><span class="number">03</span><span class="project-heading"><span class="project-title">Keeper League</span><span class="project-summary">Comparing fantasy baseball rosters through projections, season statistics, and team power rankings.</span><span class="project-tags"><span class="project-tag">Fantasy Baseball</span><span class="project-tag">Projections</span><span class="project-tag">Dashboard</span></span></span><span class="technologies"><img width="20" height="20" src="assets/javascript.svg" alt="JavaScript" title="JavaScript"><img width="20" height="20" src="assets/nodejs.svg" alt="Node.js" title="Node.js"><img width="20" height="20" src="assets/github-actions.svg" alt="GitHub Actions" title="GitHub Actions"></span><span class="indicator" aria-hidden="true">+</span></summary>
+  <summary><span class="number">03</span><span class="project-heading"><span class="project-title"></span><span class="project-summary"></span><span class="project-tags"></span></span><span class="technologies"><img width="20" height="20" src="assets/javascript.svg" alt="JavaScript" title="JavaScript"><img width="20" height="20" src="assets/nodejs.svg" alt="Node.js" title="Node.js"><img width="20" height="20" src="assets/github-actions.svg" alt="GitHub Actions" title="GitHub Actions"></span><span class="indicator" aria-hidden="true">+</span></summary>
   <div class="project-body">
     <h3 class="project-full-title">Keeper League</h3>
     <p class="project-context"></p>
-    <div class="case-section"><h4>Problem</h4><p>Roster strength changes across projection systems and as real season performance accumulates.</p></div>
-<div class="case-section"><h4>My contribution</h4><p>Combined Fantrax and FanGraphs data, shared ranking logic, and scheduled refreshes in a browser-based dashboard.</p></div>
-<div class="case-section"><h4>Result</h4><p>Lets league members compare rosters and rankings across six projection systems.</p></div>
+    <div class="case-section"><h4>Problem</h4><p></p></div>
+<div class="case-section"><h4>My contribution</h4><p></p></div>
+<div class="case-section"><h4>Result</h4><p></p></div>
 
     <p class="project-context"><strong>Technologies &amp; methods</strong><br>JavaScript / Node.js / GitHub Actions</p>
-    <details class="technical-details"><summary>Technical details</summary><div><p>A fantasy baseball dashboard for comparing rosters, player projections, and team power rankings.</p><ul><li>Combines roster and statistics data from Fantrax and FanGraphs.</li><li>Compares six projection systems and blends in season performance.</li></ul></div></details>
-    <a class="repository-link" href="https://github.com/evanwolo/keeper-league" aria-label="View Keeper League repository on GitHub">View repository <span aria-hidden="true">&#8599;</span></a>
+    <details class="technical-details"><summary>Technical details</summary><div><p>A fantasy baseball dashboard for comparing rosters, player projections, and team power rankings.</p><ul></ul></div></details>
+    <a class="repository-link" href="https://github.com/evanwolo/keeper-league" aria-label="View  repository on GitHub">View repository <span aria-hidden="true">&#8599;</span></a>
   </div>
 </details>
 <!-- PROJECTS:END -->
       </section>
 
 
-      <section aria-labelledby="blog-heading">
-        <!-- BLOG:START -->
-<h2 id="blog-heading" class="index-heading">Blog <span>00</span></h2>
-<p class="blog-empty">No posts yet.</p>
-<!-- BLOG:END -->
-      </section>
+
     </main>
 
   </body>
