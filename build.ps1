@@ -7,6 +7,9 @@ $rows = for ($i = 0; $i -lt $projects.Count; $i++) {
   if (!$p.id -or !$p.name -or !$p.description) { throw 'Projects require id, name, and description' }
   $displayName = if ($p.displayName) { $p.displayName } else { $p.name }
   $summary = if ($p.summary) { $p.summary } else { $p.description }
+  $scan = if ($p.scanBuilt -or $p.scanResult) {
+    '<span class="project-scan">' + $(if ($p.scanBuilt) { '<span><strong>Built</strong> ' + (Escape $p.scanBuilt) + '</span>' }) + $(if ($p.scanResult) { '<span><strong>Scope</strong> ' + (Escape $p.scanResult) + '</span>' }) + '</span>'
+  }
   $tags = foreach ($tag in $p.tags) { '<span class="project-tag">' + (Escape $tag) + '</span>' }
   $icons = foreach ($tech in $p.technologies) {
     if (!(Test-Path -LiteralPath $tech.icon)) { throw "Missing icon: $($tech.icon)" }
@@ -23,7 +26,7 @@ $rows = for ($i = 0; $i -lt $projects.Count; $i++) {
   $tools = if ($p.methods) { $p.methods } else { ($p.technologies.name -join ' / ') }
   @"
 <details class="project" name="projects" id="$(Escape $p.id)">
-  <summary><span class="number">$('{0:D2}' -f ($i + 1))</span><span class="project-heading"><span class="project-title">$(Escape $displayName)</span><span class="project-summary">$(Escape $summary)</span><span class="project-tags">$($tags -join '')</span></span><span class="technologies">$($icons -join '')</span><span class="indicator" aria-hidden="true">+</span></summary>
+  <summary><span class="number">$('{0:D2}' -f ($i + 1))</span><span class="project-heading"><span class="project-title">$(Escape $displayName)</span><span class="project-summary">$(Escape $summary)</span>$scan<span class="project-tags">$($tags -join '')</span></span><span class="technologies">$($icons -join '')</span><span class="indicator" aria-hidden="true">+</span></summary>
   <div class="project-body">
     <h3 class="project-full-title">$(Escape $p.name)</h3>
     <p class="project-context">$(Escape $p.context)</p>

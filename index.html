@@ -229,6 +229,12 @@
         .project > summary { padding: 16px 0; row-gap: 10px; }
         .feed-empty { padding: 14px 0; }
       }
+      .project-scan { display: grid; gap: 4px; margin-top: 10px; font-size: 12px; line-height: 1.5; color: #444; }
+      .project-scan > span { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 8px; }
+      .project-scan strong { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; color: #666; padding-top: 2px; }
+      .project > summary { grid-template-columns: 22px minmax(0, 1fr) 20px; grid-template-areas: "number heading indicator" ". technologies ."; row-gap: 10px; }
+      .project > summary .technologies { max-width: none; justify-content: flex-start; padding-top: 0; gap: 10px; }
+      @media (max-width: 649px) { .project > summary .project-tags { padding-right: 0; } }
     </style>
   </head>
   <body>
@@ -263,7 +269,7 @@
         <!-- PROJECTS:START -->
 <h2 id="projects-heading" class="index-heading">Selected projects <span>03</span></h2>
 <details class="project" name="projects" id="ecthr-vote-reconstruction">
-  <summary><span class="number">01</span><span class="project-heading"><span class="project-title">ECtHR Vote Reconstruction</span><span class="project-summary">Reconstructing hidden judicial votes from panel structure, procedural language, and patterns of dissent.</span><span class="project-tags"><span class="project-tag">Machine Learning</span><span class="project-tag">Legal Analytics</span><span class="project-tag">NLP</span></span></span><span class="technologies"><img width="20" height="20" src="assets/python.svg" alt="Python" title="Python"><img width="20" height="20" src="assets/scikit-learn.svg" alt="scikit-learn" title="scikit-learn"><img width="20" height="20" src="assets/pandas.svg" alt="pandas" title="pandas"><img width="20" height="20" src="assets/numpy.svg" alt="NumPy" title="NumPy"></span><span class="indicator" aria-hidden="true">+</span></summary>
+  <summary><span class="number">01</span><span class="project-heading"><span class="project-title">ECtHR Vote Reconstruction</span><span class="project-summary">Predicts hidden votes on European Court of Human Rights panels.</span><span class="project-scan"><span><strong>Built</strong> Panel-level ML ensemble with judge priors and procedural NLP.</span><span><strong>Scope</strong> 10,000 ballots / Python pipeline + IEEE capstone report</span></span><span class="project-tags"><span class="project-tag">Machine Learning</span><span class="project-tag">Legal Analytics</span><span class="project-tag">NLP</span></span></span><span class="technologies"><img width="20" height="20" src="assets/python.svg" alt="Python" title="Python"><img width="20" height="20" src="assets/scikit-learn.svg" alt="scikit-learn" title="scikit-learn"><img width="20" height="20" src="assets/pandas.svg" alt="pandas" title="pandas"><img width="20" height="20" src="assets/numpy.svg" alt="NumPy" title="NumPy"></span><span class="indicator" aria-hidden="true">+</span></summary>
   <div class="project-body">
     <h3 class="project-full-title">Predicting Partially Masked Judicial Votes on European Court of Human Rights Panels</h3>
     <p class="project-context">Data Science Capstone (ISTE 470) | Rochester Institute of Technology</p>
@@ -277,7 +283,7 @@
   </div>
 </details>
 <details class="project" name="projects" id="parish-scraper">
-  <summary><span class="number">02</span><span class="project-heading"><span class="project-title">Orthodox Parish Spatial Warehouse</span><span class="project-summary">Unifying fragmented parish directories into a spatial warehouse and an interactive mapping platform.</span><span class="project-tags"><span class="project-tag">Data Engineering</span><span class="project-tag">Spatial Analytics</span><span class="project-tag">ETL</span></span></span><span class="technologies"><img width="20" height="20" src="assets/airflow.svg" alt="Apache Airflow" title="Apache Airflow"><img width="20" height="20" src="assets/python.svg" alt="Python" title="Python"><img width="20" height="20" src="assets/mysql.svg" alt="MySQL 8.0" title="MySQL 8.0"><img width="20" height="20" src="assets/nodejs.svg" alt="Node.js" title="Node.js"><img width="20" height="20" src="assets/express.svg" alt="Express" title="Express"><img width="20" height="20" src="assets/vite.svg" alt="Vite" title="Vite"></span><span class="indicator" aria-hidden="true">+</span></summary>
+  <summary><span class="number">02</span><span class="project-heading"><span class="project-title">Orthodox Parish Spatial Warehouse</span><span class="project-summary">Turns fragmented Orthodox parish directories into a searchable spatial warehouse.</span><span class="project-scan"><span><strong>Built</strong> Airflow ETL, fuzzy deduplication, MySQL spatial schema, GeoJSON API.</span><span><strong>Scope</strong> 20 jurisdiction scrapers / North America + Europe</span></span><span class="project-tags"><span class="project-tag">Data Engineering</span><span class="project-tag">Spatial Analytics</span><span class="project-tag">ETL</span></span></span><span class="technologies"><img width="20" height="20" src="assets/airflow.svg" alt="Apache Airflow" title="Apache Airflow"><img width="20" height="20" src="assets/python.svg" alt="Python" title="Python"><img width="20" height="20" src="assets/mysql.svg" alt="MySQL 8.0" title="MySQL 8.0"><img width="20" height="20" src="assets/nodejs.svg" alt="Node.js" title="Node.js"><img width="20" height="20" src="assets/express.svg" alt="Express" title="Express"><img width="20" height="20" src="assets/vite.svg" alt="Vite" title="Vite"></span><span class="indicator" aria-hidden="true">+</span></summary>
   <div class="project-body">
     <h3 class="project-full-title">Orthodox Parish Data Warehouse &amp; Spatial Analytics Platform</h3>
     <p class="project-context"></p>
@@ -291,7 +297,7 @@
   </div>
 </details>
 <details class="project" name="projects" id="keeper-league">
-  <summary><span class="number">03</span><span class="project-heading"><span class="project-title">Keeper League</span><span class="project-summary">Comparing fantasy baseball rosters through projections, season statistics, and team power rankings.</span><span class="project-tags"><span class="project-tag">Fantasy Baseball</span><span class="project-tag">Projections</span><span class="project-tag">Dashboard</span></span></span><span class="technologies"><img width="20" height="20" src="assets/javascript.svg" alt="JavaScript" title="JavaScript"><img width="20" height="20" src="assets/nodejs.svg" alt="Node.js" title="Node.js"><img width="20" height="20" src="assets/github-actions.svg" alt="GitHub Actions" title="GitHub Actions"></span><span class="indicator" aria-hidden="true">+</span></summary>
+  <summary><span class="number">03</span><span class="project-heading"><span class="project-title">Keeper League</span><span class="project-summary">Ranks fantasy baseball teams using player projections and season statistics.</span><span class="project-scan"><span><strong>Built</strong> Fantrax + FanGraphs integration, ranking engine, scheduled refreshes.</span><span><strong>Scope</strong> 6 projection systems / roster comparisons + power rankings</span></span><span class="project-tags"><span class="project-tag">Fantasy Baseball</span><span class="project-tag">Projections</span><span class="project-tag">Dashboard</span></span></span><span class="technologies"><img width="20" height="20" src="assets/javascript.svg" alt="JavaScript" title="JavaScript"><img width="20" height="20" src="assets/nodejs.svg" alt="Node.js" title="Node.js"><img width="20" height="20" src="assets/github-actions.svg" alt="GitHub Actions" title="GitHub Actions"></span><span class="indicator" aria-hidden="true">+</span></summary>
   <div class="project-body">
     <h3 class="project-full-title">Keeper League</h3>
     <p class="project-context"></p>

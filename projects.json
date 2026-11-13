@@ -42,10 +42,12 @@
                                  "Validation, Diagnostics \u0026 Deliverables: Enforced strict Leave-One-Country-Out (LOGO) validation to raise cold-start accuracy on unseen countries from 57.04% to 69.03% (p = 0.0007), diagnosed a Bayesian shrinkage covariate shift on three Grand Chamber panels, and achieved a 0.96266 holdout leaderboard score (83.16% on masked test ballots) alongside a reproducible Python pipeline and IEEE research paper."
                              ],
         "displayName":  "ECtHR Vote Reconstruction",
-        "summary":  "Reconstructing hidden judicial votes from panel structure, procedural language, and patterns of dissent.",
+        "summary":  "Predicts hidden votes on European Court of Human Rights panels.",
         "problem":  "Some procedural ballots conceal their outcomes, and most masked test ballots involve respondent countries absent from training.",
         "contribution":  "Built a panel-level prediction pipeline combining dissent indicators, empirical Bayes judge priors, procedural features, and a three-model ensemble.",
-        "outcome":  "Produced a Python reconstruction pipeline and an IEEE capstone report. The supplied summary reports 96.266% holdout accuracy and 69.03% country-held-out accuracy."
+        "outcome":  "Produced a Python reconstruction pipeline and an IEEE capstone report. The supplied summary reports 96.266% holdout accuracy and 69.03% country-held-out accuracy.",
+        "scanBuilt":  "Panel-level ML ensemble with judge priors and procedural NLP.",
+        "scanResult":  "10,000 ballots / Python pipeline + IEEE capstone report"
     },
     {
         "id":  "parish-scraper",
@@ -106,10 +108,12 @@
                                  "Service Decoupling: A stateless Node.js GeoJSON API replaces static JSON snapshots, serving MBRContains viewport queries and Voronoi territory polygons to a standalone frontend."
                              ],
         "displayName":  "Orthodox Parish Spatial Warehouse",
-        "summary":  "Unifying fragmented parish directories into a spatial warehouse and an interactive mapping platform.",
+        "summary":  "Turns fragmented Orthodox parish directories into a searchable spatial warehouse.",
         "problem":  "Independent church directories overlap and use inconsistent formats, making geographic and hierarchical analysis difficult.",
         "contribution":  "Designed an Airflow ingestion pipeline, distance-based entity resolution, a MySQL spatial star schema, and a separate GeoJSON API.",
-        "outcome":  "Connects jurisdiction records to viewport queries, canonical hierarchy summaries, and Voronoi parish territories."
+        "outcome":  "Connects jurisdiction records to viewport queries, canonical hierarchy summaries, and Voronoi parish territories.",
+        "scanBuilt":  "Airflow ETL, fuzzy deduplication, MySQL spatial schema, GeoJSON API.",
+        "scanResult":  "20 jurisdiction scrapers / North America + Europe"
     },
     {
         "id":  "keeper-league",
@@ -149,9 +153,11 @@
                                  "Compares six projection systems and blends in season performance."
                              ],
         "displayName":  "Keeper League",
-        "summary":  "Comparing fantasy baseball rosters through projections, season statistics, and team power rankings.",
+        "summary":  "Ranks fantasy baseball teams using player projections and season statistics.",
         "problem":  "Roster strength changes across projection systems and as real season performance accumulates.",
         "contribution":  "Combined Fantrax and FanGraphs data, shared ranking logic, and scheduled refreshes in a browser-based dashboard.",
-        "outcome":  "Lets league members compare rosters and rankings across six projection systems."
+        "outcome":  "Lets league members compare rosters and rankings across six projection systems.",
+        "scanBuilt":  "Fantrax + FanGraphs integration, ranking engine, scheduled refreshes.",
+        "scanResult":  "6 projection systems / roster comparisons + power rankings"
     }
 ]
