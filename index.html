@@ -17,15 +17,15 @@
       html { -webkit-text-size-adjust: 100%; }
 
       body {
-        max-width: 760px;
+        max-width: 980px;
         margin: 0 auto;
-        padding: clamp(32px, 8vw, 80px) clamp(16px, 4vw, 32px);
+        padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px);
         font-size: 16px;
         line-height: 1.6;
       }
 
       h1 {
-        margin: 0 0 40px;
+        margin: 0;
         font-size: clamp(24px, 5vw, 28px);
         font-weight: 600;
         letter-spacing: -0.5px;
@@ -37,15 +37,15 @@
         font-weight: 600;
       }
 
-      section + section {
-        margin-top: 32px;
-        padding-top: 24px;
-        border-top: 1px solid #e5e5e5;
-      }
+      main > section { margin-top: 28px; }
 
       p { margin: 0; }
 
-      .intro { margin: -28px 0 24px; color: #666; }
+      .intro { margin: 6px 0 0; color: #666; max-width: 58ch; font-size: 14px; }
+      .site-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; align-items: center; padding-bottom: 24px; border-bottom: 1px solid #e5e5e5; }
+      .site-header h1 { grid-column: 1; }
+      .site-header .intro { grid-column: 1; }
+      .header-contact { grid-column: 2; grid-row: 1 / 3; }
 
       .index-heading {
         display: flex;
@@ -66,7 +66,7 @@
         grid-template-areas: "number heading technologies indicator";
         align-items: start;
         gap: 12px;
-        padding: 22px 0;
+        padding: 18px 0;
         cursor: pointer;
         list-style: none;
       }
@@ -93,7 +93,7 @@
       .project[open] .indicator { transform: rotate(45deg); }
       .project > summary:hover .project-title { text-decoration: underline; text-underline-offset: 4px; }
       summary:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
-      .project-body { padding: 0 0 26px 40px; }
+      .project-body { padding: 0 0 22px 40px; max-width: 80ch; }
       .project-body p { color: #555; }
       .project-body .project-overview { margin-top: 18px; font-size: 14px; }
       .project-full-title { margin: 0 0 8px; font-size: 17px; font-weight: 500; }
@@ -213,14 +213,31 @@
       .feed-marker { width: 7px; height: 7px; border: 1px solid #777; border-radius: 50%; flex-shrink: 0; }
       .feed-empty p span { display: block; margin-top: 4px; font-size: 12px; color: #666; }
       @media (max-width: 600px) { .feed-entry { grid-template-columns: minmax(0, 1fr); gap: 10px; } .feed-date { padding-left: 22px; } }
+      @media (min-width: 850px) {
+        main > section { display: grid; grid-template-columns: 144px minmax(0, 1fr); column-gap: 28px; align-items: start; }
+        main > section > .index-heading { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding-top: 18px; }
+        main > section > .index-heading span { font-size: 10px; letter-spacing: 0.06em; }
+        main > section > :not(.index-heading) { grid-column: 2; }
+        .feed-empty { padding: 16px 0; }
+        .project > summary { grid-template-columns: 22px minmax(0, 1fr) auto 16px; gap: 10px; }
+        .project-body { padding-left: 32px; }
+      }
+      @media (max-width: 600px) {
+        .site-header { grid-template-columns: minmax(0, 1fr); row-gap: 0; padding-bottom: 20px; }
+        .header-contact { grid-column: 1; grid-row: auto; margin-top: 16px; }
+        main > section { margin-top: 24px; }
+        .project > summary { padding: 16px 0; row-gap: 10px; }
+        .feed-empty { padding: 14px 0; }
+      }
     </style>
   </head>
   <body>
     <main>
+      <header class="site-header">
       <h1>Evan Wologodzew</h1>
       <p class="intro">I build machine learning pipelines, data platforms, and analytical tools.</p>
 
-      <section aria-label="Contact">
+      <div class="header-contact">
         <nav class="social-links" aria-label="Contact links">
           <a href="https://linkedin.com/in/evanwolo" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.42v1.57h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.32 7.41a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13Zm1.78 13.04H3.54V8.98H7.1v11.47Z"/></svg>
@@ -232,7 +249,8 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4.5h18a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2Zm9 8.15 8.5-5.31V6.5h-.26L12 11.65 3.76 6.5H3.5v.84L12 12.65Z"/></svg>
           </a>
         </nav>
-      </section>
+      </div>
+      </header>
 
       <section aria-labelledby="blog-heading">
         <!-- BLOG:START -->
