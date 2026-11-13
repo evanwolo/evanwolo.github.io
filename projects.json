@@ -30,12 +30,22 @@
                            "Cross-Border Judge \u0026 Coalition Features: Estimated leak-free Empirical Bayes judge ideology priors across 7,517 disjoint unmasked merits ballots (N_overlap = 0), quantified national-judge bias shifts (+37.91% pro-government shift on home-country merits cases versus -24.64% on procedural dismissals), and combined 28 structural/clause-parsing features with 450 TF-IDF n-grams in an equally weighted three-model ensemble.",
                            "Validation, Diagnostics \u0026 Deliverables: Enforced strict Leave-One-Country-Out (LOGO) validation to raise cold-start accuracy on unseen countries from 57.04% to 69.03% (p = 0.0007), diagnosed a Bayesian shrinkage covariate shift on three Grand Chamber panels, and achieved a 0.96266 holdout leaderboard score (83.16% on masked test ballots) alongside a reproducible Python pipeline and IEEE research paper."
                        ],
-        "resultsNote":  "Results and validation claims are reported from the project summary.",
+        "resultsNote":  "The report and validation artifacts are not linked here. Overall holdout accuracy includes observable merits ballots; the reported masked-ballot accuracy is 83.16%. Country-held-out and significance results require supporting experiment artifacts.",
         "tags":  [
                      "Machine Learning",
                      "Legal Analytics",
                      "NLP"
-                 ]
+                 ],
+        "technicalDetails":  [
+                                 "Zero-Contradiction Panel Modeling: Collapsed masked ballots into panel-level equilibria (y_i = M_p XOR d_i) across 126 training and 51 test panels, reducing target degrees of freedom by 13x and eliminating intra-panel voting contradictions.",
+                                 "Cross-Border Judge \u0026 Coalition Features: Estimated leak-free Empirical Bayes judge ideology priors across 7,517 disjoint unmasked merits ballots (N_overlap = 0), quantified national-judge bias shifts (+37.91% pro-government shift on home-country merits cases versus -24.64% on procedural dismissals), and combined 28 structural/clause-parsing features with 450 TF-IDF n-grams in an equally weighted three-model ensemble.",
+                                 "Validation, Diagnostics \u0026 Deliverables: Enforced strict Leave-One-Country-Out (LOGO) validation to raise cold-start accuracy on unseen countries from 57.04% to 69.03% (p = 0.0007), diagnosed a Bayesian shrinkage covariate shift on three Grand Chamber panels, and achieved a 0.96266 holdout leaderboard score (83.16% on masked test ballots) alongside a reproducible Python pipeline and IEEE research paper."
+                             ],
+        "displayName":  "ECtHR Vote Reconstruction",
+        "summary":  "Reconstructing hidden judicial votes from panel structure, procedural language, and patterns of dissent.",
+        "problem":  "Some procedural ballots conceal their outcomes, and most masked test ballots involve respondent countries absent from training.",
+        "contribution":  "Built a panel-level prediction pipeline combining dissent indicators, empirical Bayes judge priors, procedural features, and a three-model ensemble.",
+        "outcome":  "Produced a Python reconstruction pipeline and an IEEE capstone report. The supplied summary reports 96.266% holdout accuracy and 69.03% country-held-out accuracy."
     },
     {
         "id":  "parish-scraper",
@@ -88,7 +98,18 @@
                      "Data Engineering",
                      "Spatial Analytics",
                      "ETL"
-                 ]
+                 ],
+        "technicalDetails":  [
+                                 "ETL Orchestration: Apache Airflow Dynamic Task Mapping extracts, sanitizes, and incrementally geocodes records across 20 North American and European scrapers.",
+                                 "Dimensional Modeling: MySQL 8.0 Star Schema with fact_parish_snapshot, six dimensions, SRID 4326 spatial indexes, and WITH ROLLUP aggregations across canonical hierarchies.",
+                                 "Entity Resolution: Spherical distance (ST_Distance_Sphere), fuzzy token matching, and source-trust weighting reconcile overlapping diocesan and aggregator directories.",
+                                 "Service Decoupling: A stateless Node.js GeoJSON API replaces static JSON snapshots, serving MBRContains viewport queries and Voronoi territory polygons to a standalone frontend."
+                             ],
+        "displayName":  "Orthodox Parish Spatial Warehouse",
+        "summary":  "Unifying fragmented parish directories into a spatial warehouse and an interactive mapping platform.",
+        "problem":  "Independent church directories overlap and use inconsistent formats, making geographic and hierarchical analysis difficult.",
+        "contribution":  "Designed an Airflow ingestion pipeline, distance-based entity resolution, a MySQL spatial star schema, and a separate GeoJSON API.",
+        "outcome":  "Connects jurisdiction records to viewport queries, canonical hierarchy summaries, and Voronoi parish territories."
     },
     {
         "id":  "keeper-league",
@@ -122,6 +143,15 @@
                      "Fantasy Baseball",
                      "Projections",
                      "Dashboard"
-                 ]
+                 ],
+        "technicalDetails":  [
+                                 "Combines roster and statistics data from Fantrax and FanGraphs.",
+                                 "Compares six projection systems and blends in season performance."
+                             ],
+        "displayName":  "Keeper League",
+        "summary":  "Comparing fantasy baseball rosters through projections, season statistics, and team power rankings.",
+        "problem":  "Roster strength changes across projection systems and as real season performance accumulates.",
+        "contribution":  "Combined Fantrax and FanGraphs data, shared ranking logic, and scheduled refreshes in a browser-based dashboard.",
+        "outcome":  "Lets league members compare rosters and rankings across six projection systems."
     }
 ]
